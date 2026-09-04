@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1101000,
+    "cost_code": {
+      "full_code": "01-000",
+      "name": "General Conditions"
+    },
+    "original_budget_amount": 3880000,
+    "approved_change_orders": 0,
+    "revised_budget": 3880000,
+    "committed_costs": 3880000,
+    "job_to_date_costs": 1268000,
+    "billed_to_date": 1240000,
+    "percent_complete": 0.33,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1102000,
+    "cost_code": {
+      "full_code": "02-000",
+      "name": "Sitework, Excavation, Foundations"
+    },
+    "original_budget_amount": 4650000,
+    "approved_change_orders": 312450,
+    "revised_budget": 4962450,
+    "committed_costs": 4962450,
+    "job_to_date_costs": 4815000,
+    "billed_to_date": 4760000,
+    "percent_complete": 0.97,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1103000,
+    "cost_code": {
+      "full_code": "03-000",
+      "name": "Cast-in-Place Concrete"
+    },
+    "original_budget_amount": 9700000,
+    "approved_change_orders": 0,
+    "revised_budget": 9700000,
+    "committed_costs": 9640000,
+    "job_to_date_costs": 5780000,
+    "billed_to_date": 5640000,
+    "percent_complete": 0.6,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1104000,
+    "cost_code": {
+      "full_code": "04-000",
+      "name": "Masonry"
+    },
+    "original_budget_amount": 2150000,
+    "approved_change_orders": 0,
+    "revised_budget": 2150000,
+    "committed_costs": 2120000,
+    "job_to_date_costs": 210000,
+    "billed_to_date": 190000,
+    "percent_complete": 0.1,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1105000,
+    "cost_code": {
+      "full_code": "05-000",
+      "name": "Structural and Misc. Steel"
+    },
+    "original_budget_amount": 1420000,
+    "approved_change_orders": 0,
+    "revised_budget": 1420000,
+    "committed_costs": 1395000,
+    "job_to_date_costs": 640000,
+    "billed_to_date": 620000,
+    "percent_complete": 0.45,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1107000,
+    "cost_code": {
+      "full_code": "07-000",
+      "name": "Roofing and Waterproofing"
+    },
+    "original_budget_amount": 1960000,
+    "approved_change_orders": 0,
+    "revised_budget": 1960000,
+    "committed_costs": 1910000,
+    "job_to_date_costs": 240000,
+    "billed_to_date": 230000,
+    "percent_complete": 0.12,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1108000,
+    "cost_code": {
+      "full_code": "08-000",
+      "name": "Windows and Curtain Wall"
+    },
+    "original_budget_amount": 4120000,
+    "approved_change_orders": 0,
+    "revised_budget": 4120000,
+    "committed_costs": 4060000,
+    "job_to_date_costs": 380000,
+    "billed_to_date": 360000,
+    "percent_complete": 0.09,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1109000,
+    "cost_code": {
+      "full_code": "09-000",
+      "name": "Finishes"
+    },
+    "original_budget_amount": 6380000,
+    "approved_change_orders": 0,
+    "revised_budget": 6380000,
+    "committed_costs": 5910000,
+    "job_to_date_costs": 0,
+    "billed_to_date": 0,
+    "percent_complete": 0.0,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1114000,
+    "cost_code": {
+      "full_code": "14-000",
+      "name": "Elevators"
+    },
+    "original_budget_amount": 1480000,
+    "approved_change_orders": 0,
+    "revised_budget": 1480000,
+    "committed_costs": 1455000,
+    "job_to_date_costs": 220000,
+    "billed_to_date": 210000,
+    "percent_complete": 0.15,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1121000,
+    "cost_code": {
+      "full_code": "21-000",
+      "name": "Fire Protection"
+    },
+    "original_budget_amount": 940000,
+    "approved_change_orders": 0,
+    "revised_budget": 940000,
+    "committed_costs": 925000,
+    "job_to_date_costs": 95000,
+    "billed_to_date": 90000,
+    "percent_complete": 0.1,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1122000,
+    "cost_code": {
+      "full_code": "22-000",
+      "name": "Plumbing"
+    },
+    "original_budget_amount": 3260000,
+    "approved_change_orders": 0,
+    "revised_budget": 3260000,
+    "committed_costs": 3190000,
+    "job_to_date_costs": 740000,
+    "billed_to_date": 710000,
+    "percent_complete": 0.23,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1123000,
+    "cost_code": {
+      "full_code": "23-000",
+      "name": "HVAC"
+    },
+    "original_budget_amount": 3640000,
+    "approved_change_orders": 0,
+    "revised_budget": 3640000,
+    "committed_costs": 3590000,
+    "job_to_date_costs": 610000,
+    "billed_to_date": 590000,
+    "percent_complete": 0.17,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1126000,
+    "cost_code": {
+      "full_code": "26-000",
+      "name": "Electrical"
+    },
+    "original_budget_amount": 3540000,
+    "approved_change_orders": 0,
+    "revised_budget": 3540000,
+    "committed_costs": 3480000,
+    "job_to_date_costs": 640000,
+    "billed_to_date": 620000,
+    "percent_complete": 0.18,
+    "forecast_to_complete": null
+  },
+  {
+    "id": 1199000,
+    "cost_code": {
+      "full_code": "99-000",
+      "name": "GC Fee and Insurance"
+    },
+    "original_budget_amount": 1380000,
+    "approved_change_orders": 0,
+    "revised_budget": 1380000,
+    "committed_costs": 1380000,
+    "job_to_date_costs": 400000,
+    "billed_to_date": 400000,
+    "percent_complete": 0.29,
+    "forecast_to_complete": null
+  }
+]

@@ -1,0 +1,437 @@
+[
+  {
+    "id": 700038,
+    "number": 38,
+    "subject": "Rebar cover at cellar slab-on-grade edge",
+    "status": "closed",
+    "created_at": "2026-07-14T00:00:00Z",
+    "due_date": "2026-07-28",
+    "closed_at": "2026-08-03T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "Structural Engineer of Record"
+      }
+    ],
+    "specification_section": {
+      "number": "03 20 00",
+      "description": "Concrete Reinforcing"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Confirm 3 in. cover at exterior slab edge per S-101 note 7."
+      }
+    ],
+    "answers": [
+      {
+        "body": "3 in. confirmed. See SK-S-014."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700038"
+  },
+  {
+    "id": 700039,
+    "number": 39,
+    "subject": "Location of cellar sump pump discharge",
+    "status": "closed",
+    "created_at": "2026-07-20T00:00:00Z",
+    "due_date": "2026-08-03",
+    "closed_at": "2026-08-06T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "MEP Engineer"
+      }
+    ],
+    "specification_section": {
+      "number": "22 14 29",
+      "description": "Sump Pumps"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "P-001 shows discharge to storm; DEP letter requires sanitary. Clarify."
+      }
+    ],
+    "answers": [
+      {
+        "body": "Route to sanitary. Revised P-001 issued 08/06."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700039"
+  },
+  {
+    "id": 700040,
+    "number": 40,
+    "subject": "Level 2 corridor ceiling height at duct crossing",
+    "status": "closed",
+    "created_at": "2026-07-27T00:00:00Z",
+    "due_date": "2026-08-10",
+    "closed_at": "2026-08-12T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "09 51 13",
+      "description": "Acoustical Panel Ceilings"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Duct at grid C/4 leaves 7 ft 8 in. clear; drawings show 8 ft 0 in."
+      }
+    ],
+    "answers": [
+      {
+        "body": "7 ft 8 in. accepted at crossing only."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700040"
+  },
+  {
+    "id": 700041,
+    "number": 41,
+    "subject": "Conflict between S-201 and A-401 at slab edge, Level 5",
+    "status": "open",
+    "created_at": "2026-08-05T00:00:00Z",
+    "due_date": "2026-08-19",
+    "closed_at": null,
+    "ball_in_court": [
+      {
+        "name": "Structural Engineer of Record"
+      }
+    ],
+    "specification_section": {
+      "number": "03 30 00",
+      "description": "Cast-in-Place Concrete"
+    },
+    "cost_impact": {
+      "status": "yes"
+    },
+    "schedule_impact": {
+      "status": "yes"
+    },
+    "questions": [
+      {
+        "body": "S-201 shows slab edge at 1 ft 6 in. from grid A; A-401 wall section shows 1 ft 2 in. Level 5 formwork is scheduled to start 09/08. Which governs?"
+      }
+    ],
+    "answers": [],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700041"
+  },
+  {
+    "id": 700042,
+    "number": 42,
+    "subject": "Fireproofing thickness at transfer beam TB-3",
+    "status": "closed",
+    "created_at": "2026-08-06T00:00:00Z",
+    "due_date": "2026-08-20",
+    "closed_at": "2026-08-18T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "07 81 00",
+      "description": "Applied Fireproofing"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Confirm 2-hr rating and required thickness for W24x131 at TB-3."
+      }
+    ],
+    "answers": [
+      {
+        "body": "2-hr. 1-3/8 in. per UL N706."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700042"
+  },
+  {
+    "id": 700043,
+    "number": 43,
+    "subject": "Trash chute discharge door swing",
+    "status": "closed",
+    "created_at": "2026-08-10T00:00:00Z",
+    "due_date": "2026-08-24",
+    "closed_at": "2026-08-21T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "11 82 26",
+      "description": "Facility Waste Compactors"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Door swing conflicts with compactor clearance in cellar room C-07."
+      }
+    ],
+    "answers": [
+      {
+        "body": "Reverse swing. Revised A-110 attached."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700043"
+  },
+  {
+    "id": 700044,
+    "number": 44,
+    "subject": "Elevator pit waterproofing detail",
+    "status": "open",
+    "created_at": "2026-08-12T00:00:00Z",
+    "due_date": "2026-08-26",
+    "closed_at": null,
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "07 13 00",
+      "description": "Sheet Waterproofing"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "A-501 detail 6 references a waterproofing membrane not in the spec. Provide product or detail."
+      }
+    ],
+    "answers": [],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700044"
+  },
+  {
+    "id": 700045,
+    "number": 45,
+    "subject": "Backer rod at window sill flashing",
+    "status": "closed",
+    "created_at": "2026-08-13T00:00:00Z",
+    "due_date": "2026-08-27",
+    "closed_at": "2026-08-25T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "07 92 00",
+      "description": "Joint Sealants"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Confirm closed-cell backer rod at sill per detail 3/A-502."
+      }
+    ],
+    "answers": [
+      {
+        "body": "Confirmed."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700045"
+  },
+  {
+    "id": 700046,
+    "number": 46,
+    "subject": "Gas meter room ventilation",
+    "status": "closed",
+    "created_at": "2026-08-17T00:00:00Z",
+    "due_date": "2026-08-31",
+    "closed_at": "2026-08-28T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "MEP Engineer"
+      }
+    ],
+    "specification_section": {
+      "number": "23 05 00",
+      "description": "Common Work Results for HVAC"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Utility requires 1 sq in. per 1,000 BTU; M-101 shows louver undersized."
+      }
+    ],
+    "answers": [
+      {
+        "body": "Louver upsized to 24x24. SK-M-009."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700046"
+  },
+  {
+    "id": 700047,
+    "number": 47,
+    "subject": "Transformer vault louver size",
+    "status": "open",
+    "created_at": "2026-08-19T00:00:00Z",
+    "due_date": "2026-09-02",
+    "closed_at": null,
+    "ball_in_court": [
+      {
+        "name": "MEP Engineer"
+      }
+    ],
+    "specification_section": {
+      "number": "26 12 19",
+      "description": "Pad-Mounted Transformers"
+    },
+    "cost_impact": {
+      "status": "yes"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Utility standard calls for 36x36 louver; E-201 shows 30x30. Confirm."
+      }
+    ],
+    "answers": [],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700047"
+  },
+  {
+    "id": 700048,
+    "number": 48,
+    "subject": "Handrail bracket spacing at Stair 1",
+    "status": "closed",
+    "created_at": "2026-08-24T00:00:00Z",
+    "due_date": "2026-09-08",
+    "closed_at": "2026-08-31T00:00:00Z",
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "05 52 13",
+      "description": "Pipe and Tube Railings"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "Confirm 4 ft 0 in. max bracket spacing."
+      }
+    ],
+    "answers": [
+      {
+        "body": "4 ft 0 in. max confirmed."
+      }
+    ],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700048"
+  },
+  {
+    "id": 700049,
+    "number": 49,
+    "subject": "Unit kitchen exhaust routing, floors 3 and 4",
+    "status": "open",
+    "created_at": "2026-08-26T00:00:00Z",
+    "due_date": "2026-09-10",
+    "closed_at": null,
+    "ball_in_court": [
+      {
+        "name": "MEP Engineer"
+      }
+    ],
+    "specification_section": {
+      "number": "23 34 00",
+      "description": "HVAC Fans"
+    },
+    "cost_impact": {
+      "status": "yes"
+    },
+    "schedule_impact": {
+      "status": "yes"
+    },
+    "questions": [
+      {
+        "body": "Exhaust duct on M-302 crosses the corridor rated wall without a damper. Confirm routing or add damper."
+      }
+    ],
+    "answers": [],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700049"
+  },
+  {
+    "id": 700050,
+    "number": 50,
+    "subject": "Stair 2 handrail extension at Level 1",
+    "status": "open",
+    "created_at": "2026-08-28T00:00:00Z",
+    "due_date": "2026-09-11",
+    "closed_at": null,
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "specification_section": {
+      "number": "05 52 13",
+      "description": "Pipe and Tube Railings"
+    },
+    "cost_impact": {
+      "status": "no"
+    },
+    "schedule_impact": {
+      "status": "no"
+    },
+    "questions": [
+      {
+        "body": "12 in. extension at bottom run conflicts with door swing. Confirm."
+      }
+    ],
+    "answers": [],
+    "link": "https://app.procore.com/2264101/project/rfi/show/700050"
+  }
+]

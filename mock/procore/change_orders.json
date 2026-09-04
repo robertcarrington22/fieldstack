@@ -1,0 +1,54 @@
+[
+  {
+    "id": 910005,
+    "number": "PCO-005",
+    "title": "Unforeseen rock excavation at cellar, grids A-C",
+    "status": "approved",
+    "amount": 312450.0,
+    "created_at": "2026-06-22T00:00:00Z",
+    "submitted_to_owner_at": "2026-06-30T00:00:00Z",
+    "approved_at": "2026-07-15T00:00:00Z",
+    "executed_change_order": "CO-002",
+    "schedule_days": 6,
+    "description": "Rock encountered 2 ft above boring log elevation; hoe-ram and haul-off."
+  },
+  {
+    "id": 910007,
+    "number": "PCO-007",
+    "title": "Owner-requested lobby finish upgrade",
+    "status": "pending_owner_signature",
+    "amount": 186200.0,
+    "created_at": "2026-07-29T00:00:00Z",
+    "submitted_to_owner_at": "2026-08-08T00:00:00Z",
+    "approved_at": null,
+    "executed_change_order": null,
+    "schedule_days": 0,
+    "description": "Terrazzo in lieu of porcelain tile; wood slat ceiling; upgraded lighting per owner ASI-04."
+  },
+  {
+    "id": 910008,
+    "number": "PCO-008",
+    "title": "Utility conflict at Third Avenue water service",
+    "status": "pending_owner_review",
+    "amount": 94800.0,
+    "created_at": "2026-08-14T00:00:00Z",
+    "submitted_to_owner_at": "2026-08-21T00:00:00Z",
+    "approved_at": null,
+    "executed_change_order": null,
+    "schedule_days": 4,
+    "description": "Existing 12 in. main not shown on survey; reroute service tap 40 ft east."
+  },
+  {
+    "id": 910009,
+    "number": "PCO-009",
+    "title": "Kitchen exhaust rerouting, floors 3 and 4 (RFI-049)",
+    "status": "pricing",
+    "amount": null,
+    "created_at": "2026-08-27T00:00:00Z",
+    "submitted_to_owner_at": null,
+    "approved_at": null,
+    "executed_change_order": null,
+    "schedule_days": null,
+    "description": "Pending RFI-049 response. Rough order of magnitude $40,000 to $65,000."
+  }
+]

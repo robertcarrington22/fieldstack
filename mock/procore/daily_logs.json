@@ -1,0 +1,1333 @@
+[
+  {
+    "date": "2026-08-03",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 80,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 29,
+        "hours": 232
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 15,
+        "hours": 120
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 0,
+        "hours": 0
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 4 slab pour, 410 CY. Pour complete 14:20. Cylinders taken."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-03"
+  },
+  {
+    "date": "2026-08-04",
+    "weather_logs": [
+      {
+        "conditions": "Sunny",
+        "temperature_high_f": 81,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 38,
+        "hours": 304
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 18,
+        "hours": 144
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 0,
+        "hours": 0
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 10,
+        "hours": 80
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 4 shoring and reshoring. Column rebar Level 5 started."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-04"
+  },
+  {
+    "date": "2026-08-05",
+    "weather_logs": [
+      {
+        "conditions": "Sunny",
+        "temperature_high_f": 85,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 30,
+        "hours": 240
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 12,
+        "hours": 96
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 0,
+        "hours": 0
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Column pour Level 5 east half. RFI-041 issued on slab edge conflict."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-05"
+  },
+  {
+    "date": "2026-08-06",
+    "weather_logs": [
+      {
+        "conditions": "Thunderstorms",
+        "temperature_high_f": 76,
+        "delay_hours": 2.0,
+        "notes": "Pour finished; deck forming stopped 13:00 for lightning."
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 26,
+        "hours": 208
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 13,
+        "hours": 104
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 0,
+        "hours": 0
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Column pour Level 5 west half. Cellar sump discharge rerouted per RFI-039."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-06"
+  },
+  {
+    "date": "2026-08-07",
+    "weather_logs": [
+      {
+        "conditions": "Clear",
+        "temperature_high_f": 79,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 35,
+        "hours": 280
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 17,
+        "hours": 136
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 0,
+        "hours": 0
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 deck forming started. Plumbing rough-in Level 2 continues."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-07"
+  },
+  {
+    "date": "2026-08-10",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 91,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 34,
+        "hours": 272
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 18,
+        "hours": 144
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 deck forming. HVAC rough-in Level 1 started."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-10"
+  },
+  {
+    "date": "2026-08-11",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 82,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 34,
+        "hours": 272
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 16,
+        "hours": 128
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 10,
+        "hours": 80
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 deck forming and rebar. Electrical rough-in Level 2."
+      }
+    ],
+    "safety_violation_logs": [
+      {
+        "description": "Near miss: rebar bundle shifted during hoist. No injury. Rigging retrained 08/12."
+      }
+    ],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-11"
+  },
+  {
+    "date": "2026-08-12",
+    "weather_logs": [
+      {
+        "conditions": "Sunny",
+        "temperature_high_f": 83,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 30,
+        "hours": 240
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 18,
+        "hours": 144
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 rebar. Formwork at grid A slab edge held pending RFI-041."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-12"
+  },
+  {
+    "date": "2026-08-13",
+    "weather_logs": [
+      {
+        "conditions": "Heavy rain",
+        "temperature_high_f": 76,
+        "delay_hours": 4.0,
+        "notes": "Rebar work stopped 11:00. Half day lost."
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 34,
+        "hours": 272
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 16,
+        "hours": 128
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 4,
+        "hours": 32
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 rebar and embeds. MEP sleeve coordination Level 5."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-13"
+  },
+  {
+    "date": "2026-08-14",
+    "weather_logs": [
+      {
+        "conditions": "Sunny",
+        "temperature_high_f": 86,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 37,
+        "hours": 296
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 17,
+        "hours": 136
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 slab pour delayed to 08/17 pending RFI-041 at grid A edge."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-14"
+  },
+  {
+    "date": "2026-08-17",
+    "weather_logs": [
+      {
+        "conditions": "Sunny",
+        "temperature_high_f": 92,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 29,
+        "hours": 232
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 15,
+        "hours": 120
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 4,
+        "hours": 32
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 slab pour, partial, 340 CY excluding grid A edge strip (RFI-041)."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-17"
+  },
+  {
+    "date": "2026-08-18",
+    "weather_logs": [
+      {
+        "conditions": "Partly cloudy",
+        "temperature_high_f": 91,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 33,
+        "hours": 264
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 12,
+        "hours": 96
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 10,
+        "hours": 80
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 5 reshoring. Column rebar Level 6 started."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-18"
+  },
+  {
+    "date": "2026-08-19",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 86,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 28,
+        "hours": 224
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 18,
+        "hours": 144
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Column pour Level 6 east half. Transformer vault louver RFI-047 issued."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-19"
+  },
+  {
+    "date": "2026-08-20",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 91,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 38,
+        "hours": 304
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 17,
+        "hours": 136
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Column pour Level 6 west half. RTU submittal returned R&R."
+      }
+    ],
+    "safety_violation_logs": [
+      {
+        "description": "First aid: laceration to hand, Ironline Rebar. Returned to work same day."
+      }
+    ],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-20"
+  },
+  {
+    "date": "2026-08-21",
+    "weather_logs": [
+      {
+        "conditions": "Clear",
+        "temperature_high_f": 88,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 28,
+        "hours": 224
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 16,
+        "hours": 128
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 4,
+        "hours": 32
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 deck forming started. PCO-008 submitted to owner."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-21"
+  },
+  {
+    "date": "2026-08-24",
+    "weather_logs": [
+      {
+        "conditions": "Clear",
+        "temperature_high_f": 90,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 29,
+        "hours": 232
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 12,
+        "hours": 96
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 deck forming. Elevator rail brackets Level 1-2."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-24"
+  },
+  {
+    "date": "2026-08-25",
+    "weather_logs": [
+      {
+        "conditions": "Heat advisory, 97F",
+        "temperature_high_f": 97,
+        "delay_hours": 1.5,
+        "notes": "Extended breaks per heat plan; no lost pours."
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 35,
+        "hours": 280
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 13,
+        "hours": 104
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 deck forming and rebar. Plumbing rough-in Level 3 started."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-25"
+  },
+  {
+    "date": "2026-08-26",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 92,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 27,
+        "hours": 216
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 17,
+        "hours": 136
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 5,
+        "hours": 40
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 rebar. Kitchen exhaust conflict found at rated corridor wall; RFI-049 issued."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-26"
+  },
+  {
+    "date": "2026-08-27",
+    "weather_logs": [
+      {
+        "conditions": "Sunny",
+        "temperature_high_f": 89,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 26,
+        "hours": 208
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 14,
+        "hours": 112
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 10,
+        "hours": 80
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 rebar and embeds. Fireproofing at TB-3 complete."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-27"
+  },
+  {
+    "date": "2026-08-28",
+    "weather_logs": [
+      {
+        "conditions": "Partly cloudy",
+        "temperature_high_f": 90,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 26,
+        "hours": 208
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 17,
+        "hours": 136
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 6,
+        "hours": 48
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 9,
+        "hours": 72
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 2,
+        "hours": 16
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 slab pour, 405 CY, complete 15:05. Grid A strip Level 5 still open."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-28"
+  },
+  {
+    "date": "2026-08-31",
+    "weather_logs": [
+      {
+        "conditions": "Overcast",
+        "temperature_high_f": 92,
+        "delay_hours": 0.0,
+        "notes": ""
+      }
+    ],
+    "manpower_logs": [
+      {
+        "company": "Sample Builders LLC",
+        "trade": "GC supervision and labor",
+        "workers": 8,
+        "hours": 64
+      },
+      {
+        "company": "Kings County Concrete Corp.",
+        "trade": "Concrete superstructure",
+        "workers": 31,
+        "hours": 248
+      },
+      {
+        "company": "Ironline Rebar Inc.",
+        "trade": "Reinforcing steel",
+        "workers": 16,
+        "hours": 128
+      },
+      {
+        "company": "Harbor Mechanical",
+        "trade": "HVAC rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Brightwire Electric",
+        "trade": "Electrical rough-in",
+        "workers": 10,
+        "hours": 80
+      },
+      {
+        "company": "Five Boro Plumbing",
+        "trade": "Plumbing rough-in",
+        "workers": 7,
+        "hours": 56
+      },
+      {
+        "company": "Atlas Hoist and Crane",
+        "trade": "Tower crane and hoist",
+        "workers": 3,
+        "hours": 24
+      }
+    ],
+    "work_logs": [
+      {
+        "description": "Level 6 reshoring. Column rebar Level 7 started. Fire alarm shop drawings submitted."
+      }
+    ],
+    "safety_violation_logs": [],
+    "delivery_logs": [],
+    "link": "https://app.procore.com/2264101/project/daily_log/list?date=2026-08-31"
+  }
+]

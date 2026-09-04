@@ -1,0 +1,202 @@
+[
+  {
+    "id": 811182,
+    "number": "118",
+    "revision": 2,
+    "title": "Curtain Wall Shop Drawings, North and East Elevations",
+    "specification_section": {
+      "number": "08 44 13",
+      "description": "Glazed Aluminum Curtain Walls"
+    },
+    "status": "In Review",
+    "submit_by": null,
+    "received_date": "2026-07-21",
+    "due_date": "2026-08-10",
+    "returned_date": null,
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": true,
+      "note": "Rev 1 returned Revise and Resubmit 07/10. Rev 2 in review 45 days. Fabrication lead time 14 weeks."
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811182"
+  },
+  {
+    "id": 811210,
+    "number": "121",
+    "revision": 0,
+    "title": "Elevator Equipment and Machine Room Layout",
+    "specification_section": {
+      "number": "14 21 00",
+      "description": "Electric Traction Elevators"
+    },
+    "status": "Approved as Noted",
+    "submit_by": null,
+    "received_date": "2026-07-28",
+    "due_date": "2026-08-17",
+    "returned_date": "2026-08-14",
+    "ball_in_court": [
+      {
+        "name": "GC"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": false,
+      "note": null
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811210"
+  },
+  {
+    "id": 811231,
+    "number": "123",
+    "revision": 1,
+    "title": "Concrete Mix Design, 6000 psi Columns Levels 5-9",
+    "specification_section": {
+      "number": "03 30 00",
+      "description": "Cast-in-Place Concrete"
+    },
+    "status": "Approved",
+    "submit_by": null,
+    "received_date": "2026-08-03",
+    "due_date": "2026-08-21",
+    "returned_date": "2026-08-11",
+    "ball_in_court": [
+      {
+        "name": "GC"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": false,
+      "note": null
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811231"
+  },
+  {
+    "id": 811250,
+    "number": "125",
+    "revision": 0,
+    "title": "Rooftop Units RTU-1 and RTU-2",
+    "specification_section": {
+      "number": "23 74 13",
+      "description": "Packaged Rooftop Air-Conditioning Units"
+    },
+    "status": "Revise and Resubmit",
+    "submit_by": null,
+    "received_date": "2026-07-30",
+    "due_date": "2026-08-19",
+    "returned_date": "2026-08-20",
+    "ball_in_court": [
+      {
+        "name": "Subcontractor: Harbor Mechanical"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": false,
+      "note": "Returned R&R 08/20; resubmittal due 09/03, not yet received."
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811250"
+  },
+  {
+    "id": 811260,
+    "number": "126",
+    "revision": 0,
+    "title": "Fireproofing Product Data",
+    "specification_section": {
+      "number": "07 81 00",
+      "description": "Applied Fireproofing"
+    },
+    "status": "Approved",
+    "submit_by": null,
+    "received_date": "2026-08-06",
+    "due_date": "2026-08-25",
+    "returned_date": "2026-08-19",
+    "ball_in_court": [
+      {
+        "name": "GC"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": false,
+      "note": null
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811260"
+  },
+  {
+    "id": 811271,
+    "number": "127",
+    "revision": 1,
+    "title": "Window Package, Typical Unit Windows",
+    "specification_section": {
+      "number": "08 53 13",
+      "description": "Vinyl Windows"
+    },
+    "status": "In Review",
+    "submit_by": null,
+    "received_date": "2026-08-11",
+    "due_date": "2026-08-31",
+    "returned_date": null,
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": true,
+      "note": "Rev 0 returned R&R 08/04 for U-value. Rev 1 in review."
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811271"
+  },
+  {
+    "id": 811280,
+    "number": "128",
+    "revision": 0,
+    "title": "Unit Entry Doors and Frames",
+    "specification_section": {
+      "number": "08 11 13",
+      "description": "Hollow Metal Doors and Frames"
+    },
+    "status": "In Review",
+    "submit_by": null,
+    "received_date": "2026-08-18",
+    "due_date": "2026-09-08",
+    "returned_date": null,
+    "ball_in_court": [
+      {
+        "name": "Architect"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": false,
+      "note": null
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811280"
+  },
+  {
+    "id": 811300,
+    "number": "130",
+    "revision": 0,
+    "title": "Fire Alarm System Shop Drawings",
+    "specification_section": {
+      "number": "28 31 00",
+      "description": "Fire Detection and Alarm"
+    },
+    "status": "Submitted",
+    "submit_by": null,
+    "received_date": "2026-08-31",
+    "due_date": "2026-09-21",
+    "returned_date": null,
+    "ball_in_court": [
+      {
+        "name": "MEP Engineer"
+      }
+    ],
+    "custom_fields": {
+      "schedule_critical": false,
+      "note": null
+    },
+    "link": "https://app.procore.com/2264101/project/submittals/811300"
+  }
+]

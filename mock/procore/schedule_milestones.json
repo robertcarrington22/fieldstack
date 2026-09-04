@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Notice to Proceed",
+    "baseline": "2026-02-02",
+    "current": "2026-02-02",
+    "actual": "2026-02-02"
+  },
+  {
+    "id": 2,
+    "name": "Foundations Complete",
+    "baseline": "2026-05-29",
+    "current": "2026-06-05",
+    "actual": "2026-06-05"
+  },
+  {
+    "id": 3,
+    "name": "Superstructure Level 5 Formwork Start",
+    "baseline": "2026-09-01",
+    "current": "2026-09-08",
+    "actual": null
+  },
+  {
+    "id": 4,
+    "name": "Superstructure Topping Out",
+    "baseline": "2026-10-16",
+    "current": "2026-10-30",
+    "actual": null
+  },
+  {
+    "id": 5,
+    "name": "MEP Rough-In Complete, Floors 1-4",
+    "baseline": "2026-11-13",
+    "current": "2026-11-13",
+    "actual": null
+  },
+  {
+    "id": 6,
+    "name": "Building Watertight",
+    "baseline": "2027-01-29",
+    "current": "2027-02-19",
+    "actual": null
+  },
+  {
+    "id": 7,
+    "name": "Elevators Operational",
+    "baseline": "2027-07-30",
+    "current": "2027-07-30",
+    "actual": null
+  },
+  {
+    "id": 8,
+    "name": "Substantial Completion",
+    "baseline": "2027-11-30",
+    "current": "2027-12-14",
+    "actual": null
+  }
+]

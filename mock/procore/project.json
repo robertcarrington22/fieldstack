@@ -1,0 +1,29 @@
+{
+  "id": 2264101,
+  "name": "Bergen Street Apartments",
+  "project_number": "26-014",
+  "address": "1188 Bergen Street",
+  "city": "Brooklyn",
+  "state_code": "NY",
+  "zip": "11216",
+  "description": "9-story, 96-unit affordable housing building with ground-floor community facility and cellar.",
+  "start_date": "2026-02-02",
+  "completion_date": "2027-11-30",
+  "total_value": 48500000.0,
+  "project_stage": {
+    "name": "Course of Construction"
+  },
+  "owner": {
+    "name": "Bergen Street Housing LP"
+  },
+  "custom_fields": {
+    "owners_rep": "Meridian Development Advisory",
+    "lender": "Atlantic Community Lending Fund",
+    "rfi_response_window_business_days": 10,
+    "submittal_review_window_business_days": 14,
+    "gc_name": "Sample Builders LLC",
+    "project_executive": "D. Okafor",
+    "project_manager": "L. Reyes",
+    "superintendent": "M. Kowalski"
+  }
+}
