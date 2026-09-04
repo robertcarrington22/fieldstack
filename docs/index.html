@@ -78,15 +78,24 @@
   .hero .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
   .hero .fine { margin-top: 16px; font-size: 13px; color: var(--muted); }
 
-  .product { margin: 56px auto 0; max-width: 1040px; perspective: 1600px; }
-  .browser { border-radius: 16px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-lg); overflow: hidden; transform: rotateX(6deg) scale(.98); transform-origin: 50% 0; transition: transform .9s var(--ease); will-change: transform; }
-  .browser.flat { transform: none; }
-  .browser .chrome { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); background: #FCFCFB; }
-  .browser .chrome i { width: 10px; height: 10px; border-radius: 50%; background: var(--border-strong); display: inline-block; }
-  .browser .chrome .url { flex: 1; margin: 0 auto; max-width: 420px; font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--ground); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; text-align: center; }
-  .browser .chrome a { font-size: 13px; color: var(--secondary); }
-  .browser .chrome a:hover { color: var(--ink); }
-  .browser iframe { width: 100%; height: 640px; border: 0; display: block; background: #FAFAF7; }
+  .anatomy { position: relative; margin: 60px auto 0; max-width: 640px; padding: 0 60px; }
+  .sheet { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow-lg); padding: 22px 26px 26px; text-align: left; position: relative; z-index: 1; }
+  .sh-top { display: flex; justify-content: space-between; margin-bottom: 14px; }
+  .sh-k { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .sh-title { height: 16px; width: 46%; border-radius: 5px; background: var(--ink); opacity: .85; margin-bottom: 18px; }
+  .sh-sec { margin-bottom: 14px; }
+  .sh-sec.attn { border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 10px 12px; border-radius: 0 10px 10px 0; }
+  .sh-h { font-size: 12.5px; font-weight: 500; color: var(--ink); margin-bottom: 7px; letter-spacing: -.01em; }
+  .sh-l { height: 9px; border-radius: 5px; background: var(--border); margin-bottom: 7px; position: relative; }
+  .sh-l.w90 { width: 90% } .sh-l.w85 { width: 85% } .sh-l.w80 { width: 80% } .sh-l.w75 { width: 75% } .sh-l.w70 { width: 70% } .sh-l.w65 { width: 65% } .sh-l.w60 { width: 60% }
+  .sh-l .chip { position: absolute; right: -44px; top: -4px; font-family: var(--mono); font-style: normal; font-size: 10px; line-height: 1; padding: 4px 6px; border-radius: 5px; color: #1F4E79; background: #E7EEF5; }
+  .sh-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .src { position: absolute; z-index: 0; display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); font-size: 13px; color: var(--secondary); animation: float 6s ease-in-out infinite; }
+  .src .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .src-a { left: 0; top: 22%; animation-delay: 0s; } .src-b { right: 0; top: 46%; animation-delay: -2s; } .src-c { left: 8px; top: 74%; animation-delay: -4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+  @media (prefers-reduced-motion: reduce) { .src { animation: none; } }
+  @media (max-width: 700px) { .anatomy { padding: 0 8px; } .src { display: none; } .sh-cols { grid-template-columns: 1fr; gap: 0; } .sh-l .chip { right: -36px; } }
 
   .logos { margin: 40px auto 0; text-align: center; }
   .logos .k { font-size: 12px; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; font-family: var(--mono); margin-bottom: 14px; }
@@ -168,7 +177,7 @@
     <div class="links">
       <a href="#how">How it works</a>
       <a href="#services">Services</a>
-      <a href="#sample">Sample</a>
+      <a href="#trust">Why it's right</a>
       <a href="#faq">FAQ</a>
     </div>
     <a class="btn primary sm cta" href="mailto:robertcarrington22@gmail.com?subject=Fieldstack%20pilot">Start a pilot</a>
@@ -183,15 +192,24 @@
       <p class="sub rv d2">Fieldstack pulls RFIs, submittals, change orders, cost, and schedule from the systems you already run, computes the numbers, and drafts the monthly owner report in your voice. Your project executive edits and sends.</p>
       <div class="actions rv d3">
         <a class="btn accent" href="mailto:robertcarrington22@gmail.com?subject=Fieldstack%20pilot">Start a 30-day pilot <span class="arr">→</span></a>
-        <a class="btn" href="#sample">View a sample report</a>
+        <a class="btn" href="#how">See how it works</a>
       </div>
       <p class="fine rv d4">Free on one project. Read-only access. Set up in under an hour.</p>
 
-      <div class="product rv d4">
-        <div class="browser" id="browser">
-          <div class="chrome"><i></i><i></i><i></i><span class="url">bergen-street-apartments · owner report · august 2026</span><a href="sample-report.html" target="_blank" rel="noopener">Open ↗</a></div>
-          <iframe src="sample-report.html" title="Sample owner report" loading="lazy"></iframe>
+      <div class="anatomy rv d4" aria-hidden="true">
+        <div class="sheet">
+          <div class="sh-top"><span class="sh-k">Monthly owner report</span><span class="sh-k">Draft for review</span></div>
+          <div class="sh-title"></div>
+          <div class="sh-sec"><div class="sh-h">Executive summary</div><div class="sh-l w90"></div><div class="sh-l w80"><i class="chip">RFI</i></div><div class="sh-l w70"><i class="chip">SOV</i></div></div>
+          <div class="sh-sec attn"><div class="sh-h">Requires attention</div><div class="sh-l w85"><i class="chip">SUB</i></div><div class="sh-l w60"><i class="chip">PCO</i></div></div>
+          <div class="sh-cols">
+            <div class="sh-sec"><div class="sh-h">Open items</div><div class="sh-l w90"><i class="chip">RFI</i></div><div class="sh-l w75"></div><div class="sh-l w80"><i class="chip">SUB</i></div></div>
+            <div class="sh-sec"><div class="sh-h">Schedule and cost</div><div class="sh-l w70"><i class="chip">MS</i></div><div class="sh-l w85"></div><div class="sh-l w65"><i class="chip">SOV</i></div></div>
+          </div>
         </div>
+        <div class="src src-a"><span class="dot"></span>Procore</div>
+        <div class="src src-b"><span class="dot"></span>Job cost</div>
+        <div class="src src-c"><span class="dot"></span>Schedule</div>
       </div>
 
       <div class="logos rv">
@@ -258,7 +276,7 @@
     </div>
   </section>
 
-  <section class="blk tight" id="sample">
+  <section class="blk tight" id="trust">
     <div class="wrap">
       <div class="head">
         <div><div class="eyebrow rv">Why you can send it</div><h2 class="rv d1">The model never does the math.</h2></div>
@@ -266,7 +284,7 @@
       </div>
       <div class="principles">
         <div class="principle rv"><div class="k">01 · Computed</div><h3>Numbers from code, not from a prompt</h3><p>Aging, dollars, percents, and dates come from deterministic calculations you can audit. The narrative receives them as facts and is told to invent nothing.</p></div>
-        <div class="principle rv d1"><div class="k">02 · Cited</div><h3>Every claim links to a record</h3><p>RFI-041, SUB-118.R2, PCO-007. Each citation is a link back to Procore, so an owner's rep can check any sentence in one click.</p></div>
+        <div class="principle rv d1"><div class="k">02 · Cited</div><h3>Every claim links to a record</h3><p>Every RFI, submittal, change order, log entry, and cost line cited in the report is a link back to the record in Procore, so an owner's rep can check any sentence in one click.</p></div>
         <div class="principle rv d2"><div class="k">03 · Approved</div><h3>A person hits send</h3><p>Nothing posts back to your systems and nothing goes to the owner on its own. Your PX reads, edits, and sends.</p></div>
       </div>
     </div>
@@ -296,7 +314,7 @@
 </main>
 
 <footer class="wrap">
-  <span>Fieldstack · September 2026 · The sample report uses invented data; no real project is described.</span>
+  <span>Fieldstack · New York · September 2026</span>
   <span><a href="https://github.com/robertcarrington22/fieldstack">GitHub</a> · <a href="https://github.com/robertcarrington22/fieldstack/blob/main/ARCHITECTURE.md">Architecture</a></span>
 </footer>
 
@@ -310,18 +328,13 @@
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
   $$('.rv').forEach(function (el) { io.observe(el); });
 
-  var nav = document.getElementById('nav'), browser = document.getElementById('browser');
+  var nav = document.getElementById('nav');
   function onScroll() {
     var y = window.scrollY || document.documentElement.scrollTop;
     nav.classList.toggle('scrolled', y > 10);
-    if (browser && !reduce) {
-      var r = browser.getBoundingClientRect();
-      browser.classList.toggle('flat', r.top < window.innerHeight * 0.55);
-    }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-  if (reduce && browser) browser.classList.add('flat');
 
   // FAQ accordion: one open at a time, animated height
   var qs = $$('.q');
