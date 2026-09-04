@@ -291,6 +291,8 @@
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
   $$('.rv').forEach(function (el) { io.observe(el); });
+  // Safety net: if the observer is throttled (background tab, odd webview), reveal everything anyway.
+  setTimeout(function () { $$('.rv:not(.in)').forEach(function (el) { el.classList.add('in'); }); }, 1800);
 
   var nav = document.getElementById('nav');
   function onScroll() {
