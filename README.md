@@ -18,8 +18,22 @@ python run.py --list                             # connectors and modules availa
 python -m unittest discover -s tests -v          # 8 tests
 ```
 
-Output lands in `out/`: HTML report, Markdown, computed facts as JSON, and a SQLite store
-of every snapshot and run.
+Output lands in `out/`: HTML report, Markdown, computed facts as JSON, a draft package for
+the review screen, and a SQLite store of every snapshot and run.
+
+## Review screen
+
+```bash
+python review.py                                 # http://127.0.0.1:8787/
+```
+
+The one screen a project executive touches. Each draft the pipeline produces opens as an
+editor: the narrative sections are editable with citations kept as chips, the left rail shows
+the computed record behind every citation in the section you are in (and flags any citation
+that matches no record), owner decisions are a checklist, the right rail holds the numbers.
+Save is automatic. Preview renders the current edits through the real renderer. Approve
+locks the draft, writes the final report to `out/approved/`, and runs the tenant's webhook
+and email deliveries. Nothing goes to the owner before that click.
 
 ## How a tenant is wired
 

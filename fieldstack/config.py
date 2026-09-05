@@ -88,6 +88,8 @@ class TenantConfig:
     llm_model: str = "claude-opus-5"
     deliveries: list[DeliveryConfig] = field(default_factory=list)
     store_path: str = "out/fieldstack.sqlite"
+    drafts_path: str = "out/drafts"
+    approved_path: str = "out/approved"
     root: Path = Path(".")
 
     def project(self, key: str) -> ProjectConfig:
@@ -122,5 +124,7 @@ def load(path: str | Path) -> TenantConfig:
         name=raw.get("tenant", {}).get("name", "Tenant"), connectors=connectors, projects=projects,
         precedence=raw.get("precedence", {}), llm_provider=llm.get("provider", "auto"),
         llm_model=llm.get("model", "claude-opus-5"), deliveries=deliveries,
-        store_path=raw.get("store", {}).get("path", "out/fieldstack.sqlite"), root=root,
+        store_path=raw.get("store", {}).get("path", "out/fieldstack.sqlite"),
+        drafts_path=raw.get("review", {}).get("drafts", "out/drafts"),
+        approved_path=raw.get("review", {}).get("approved", "out/approved"), root=root,
     )

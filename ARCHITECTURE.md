@@ -108,6 +108,21 @@ full payload) and `module_runs` (facts, provider, tokens). Margin Watch's fade
 detection and the WIP forecast read history from here. Postgres keeps the same
 interface; add pgvector alongside when Docs Copilot needs a document index.
 
+## Review
+
+`fieldstack/review/`. The job runner writes a draft package per run (`out/drafts/*.json`:
+snapshot, facts, narrative, links, edits, history). `server.py` is a standard-library HTTP
+server exposing the package as a small JSON API and serving `app.html`, the editor.
+`drafts.py` owns the rules: edits are stored separately from the generated narrative so
+Reset always works; approval re-runs `metrics.compute` on the stored snapshot and renders
+through the same `render_html` as the pipeline, so what is sent is exactly what the numbers
+say; an approved draft is locked. Regenerate calls the narrator again on the stored snapshot
+and returns text without overwriting edits.
+
+The editor is one HTML file with no build step. Citations are non-editable chips inside
+`contenteditable` blocks and serialize back to `(REF)` text, so the approval validator can
+check every citation against the facts index and warn on unknown refs or uncited numbers.
+
 ## Delivery
 
 `file`, `webhook` (Slack and Teams both accept `{"text": ...}`), `email` (SMTP).

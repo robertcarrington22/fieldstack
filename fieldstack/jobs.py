@@ -32,6 +32,7 @@ class RunResult:
     notes: list[str]
     deliveries: list[str] = field(default_factory=list)
     llm_usage: dict = field(default_factory=dict)
+    draft_path: str = ""
 
 
 def build_connectors(cfg: TenantConfig):
@@ -74,6 +75,10 @@ def run_module(cfg: TenantConfig, project_key: str, module_name: str, period: tu
         st.save_run(cfg.name, project_key, module_name, as_of, gateway.provider, gateway.model, usage, output.facts)
         st.close()
 
+    from .review.drafts import write_draft
+    draft_path = write_draft(cfg, project_key, module_name, as_of, snap, output, sample)
+    log.info("draft: %s", draft_path)
+
     sent = []
     if deliver:
         for d in cfg.deliveries:
@@ -82,4 +87,5 @@ def run_module(cfg: TenantConfig, project_key: str, module_name: str, period: tu
                 settings["dir"] = str(cfg.resolve(settings.get("dir", "out")))
             sent.append(delivery_registry.build(d.kind, settings).send(output))
 
-    return RunResult(output=output, sources=snap.sources, notes=snap.notes, deliveries=sent, llm_usage=usage)
+    return RunResult(output=output, sources=snap.sources, notes=snap.notes, deliveries=sent, llm_usage=usage,
+                     draft_path=str(draft_path))

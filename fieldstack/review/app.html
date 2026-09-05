@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldstack Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F5F5F3; --surface: #FFFFFF; --rail: #FAFAF8; --ink: #111312; --secondary: #62666A; --muted: #9A9EA2;
+    --border: #E5E5E1; --border-strong: #CFCFCA; --accent: #E5580B; --accent-hover: #C94A05; --accent-soft: #FFF1E8; --accent-ink: #9A3A05;
+    --blue: #1F4E79; --blue-soft: #E7EEF5; --good: #1F8A4C; --good-soft: #E6F3EB; --warn: #9A6B00; --warn-soft: #FFF6DC; --bad: #B93A3A; --bad-soft: #F9E5E5;
+    --sel: #FFE9D9; --shadow: 0 1px 2px rgba(17,19,18,.05), 0 12px 30px -18px rgba(17,19,18,.22);
+    --sans: "Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif; --mono: "DM Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --ground: #141615; --surface: #1C1F1E; --rail: #181B1A; --ink: #ECEDE9; --secondary: #A3A8A2; --muted: #6F756F;
+    --border: #2B2F2D; --border-strong: #3C413E; --accent: #F2793A; --accent-hover: #FF8C52; --accent-soft: #3A2417; --accent-ink: #FFB48A;
+    --blue: #7FB0D3; --blue-soft: #1F2E39; --good: #6CC08E; --good-soft: #1B3226; --warn: #E8B24A; --warn-soft: #3A2E12; --bad: #E08484; --bad-soft: #3A1F1F;
+    --sel: #3A2417; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 30px -18px rgba(0,0,0,.6);
+  } }
+  :root[data-theme="dark"] {
+    --ground: #141615; --surface: #1C1F1E; --rail: #181B1A; --ink: #ECEDE9; --secondary: #A3A8A2; --muted: #6F756F;
+    --border: #2B2F2D; --border-strong: #3C413E; --accent: #F2793A; --accent-hover: #FF8C52; --accent-soft: #3A2417; --accent-ink: #FFB48A;
+    --blue: #7FB0D3; --blue-soft: #1F2E39; --good: #6CC08E; --good-soft: #1B3226; --warn: #E8B24A; --warn-soft: #3A2E12; --bad: #E08484; --bad-soft: #3A1F1F;
+    --sel: #3A2417; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 30px -18px rgba(0,0,0,.6);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); font-size: 14.5px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  a { color: var(--blue); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  button { font: inherit; }
+  .mono { font-family: var(--mono); }
+
+  /* top bar */
+  .top { position: sticky; top: 0; z-index: 20; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 10px 18px; background: var(--surface); border-bottom: 1px solid var(--border); }
+  .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 600; letter-spacing: -.02em; }
+  .brand .dot { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); transform: rotate(45deg); }
+  .brand span.sub { color: var(--muted); font-weight: 400; margin-left: 4px; }
+  .mid { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  select { font: inherit; font-size: 14px; padding: 7px 30px 7px 10px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); max-width: 420px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-family: var(--mono); letter-spacing: .02em; }
+  .pill.draft { background: var(--warn-soft); color: var(--warn); } .pill.approved { background: var(--good-soft); color: var(--good); }
+  .pill.sample { background: var(--accent-soft); color: var(--accent-ink); }
+  .timer { font-family: var(--mono); font-size: 12px; color: var(--secondary); white-space: nowrap; }
+  .timer b { color: var(--ink); font-weight: 500; }
+  .actions { display: flex; gap: 8px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); color: var(--ink); font-size: 14px; font-weight: 500; cursor: pointer; transition: transform .2s, box-shadow .2s, background .15s, border-color .15s; white-space: nowrap; }
+  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); border-color: var(--ink); }
+  .btn:disabled { opacity: .55; cursor: default; transform: none; box-shadow: none; }
+  .btn.accent { background: var(--accent); border-color: var(--accent); color: #fff; } .btn.accent:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn.sm { padding: 5px 10px; font-size: 12.5px; font-weight: 500; }
+  .btn.ghost { border-color: transparent; background: transparent; color: var(--secondary); } .btn.ghost:hover { background: var(--ground); color: var(--ink); box-shadow: none; transform: none; border-color: transparent; }
+  .saved { font-size: 12px; color: var(--muted); min-width: 90px; text-align: right; }
+  .saved.dirty { color: var(--warn); }
+
+  /* layout */
+  .layout { display: grid; grid-template-columns: 300px minmax(0, 1fr) 320px; min-height: calc(100vh - 57px); }
+  .rail { background: var(--rail); border-right: 1px solid var(--border); padding: 16px 16px 40px; position: sticky; top: 57px; height: calc(100vh - 57px); overflow-y: auto; }
+  .rail.right { border-right: 0; border-left: 1px solid var(--border); }
+  .rail h4 { margin: 0 0 10px; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; font-family: var(--mono); color: var(--muted); font-weight: 500; display: flex; justify-content: space-between; align-items: center; }
+  .rail h4 span { text-transform: none; letter-spacing: 0; font-family: var(--sans); font-size: 12px; color: var(--secondary); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; font-size: 13px; transition: border-color .2s, box-shadow .2s; }
+  .card.hi { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .card .ref { font-family: var(--mono); font-size: 12px; color: var(--blue); display: flex; justify-content: space-between; align-items: center; }
+  .card .ref .kind { color: var(--muted); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
+  .card .t { margin: 3px 0 4px; color: var(--ink); font-weight: 500; line-height: 1.35; }
+  .card .m { color: var(--secondary); font-size: 12.5px; line-height: 1.45; }
+  .card .m b { color: var(--ink); font-weight: 500; }
+  .card .m .bad { color: var(--bad); font-weight: 500; } .card .m .good { color: var(--good); }
+  .card a.open { display: inline-block; margin-top: 6px; font-size: 12px; color: var(--blue); text-decoration: none; }
+  .card a.open:hover { text-decoration: underline; }
+  .card.missing { border-color: var(--bad); background: var(--bad-soft); } .card.missing .ref { color: var(--bad); }
+  .empty { color: var(--muted); font-size: 13px; padding: 8px 2px; }
+
+  /* editor */
+  .editor { padding: 28px 40px 120px; max-width: 860px; width: 100%; justify-self: center; }
+  .doc-head { border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 8px; }
+  .doc-head .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .doc-head h1 { font-size: 26px; font-weight: 500; letter-spacing: -.02em; margin: 4px 0 6px; }
+  .doc-head .to { font-size: 13px; color: var(--secondary); }
+  .attn { margin: 18px 0 6px; padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 10px 10px 0; }
+  .attn .k { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 4px; }
+  .attn ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--ink); } .attn li { margin: 2px 0; }
+  .attn .note { font-size: 12px; color: var(--secondary); margin-top: 6px; }
+
+  section.sec { margin-top: 30px; }
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .sec-head h2 { font-size: 17px; font-weight: 600; letter-spacing: -.015em; margin: 0; display: flex; align-items: center; gap: 8px; }
+  .sec-head h2 .mod { width: 7px; height: 7px; border-radius: 50%; background: var(--warn); opacity: 0; transition: opacity .2s; }
+  .sec-head h2 .mod.on { opacity: 1; }
+  .sec-head .tools { display: flex; gap: 4px; align-items: center; opacity: .0; transition: opacity .2s; }
+  section.sec:hover .sec-head .tools, section.sec:focus-within .sec-head .tools { opacity: 1; }
+  .sec-head .stat { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin-right: 6px; }
+  .ed { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px; font-size: 15.5px; line-height: 1.65; min-height: 60px; transition: border-color .15s, box-shadow .15s; }
+  .ed:focus-within, .ed.active { border-color: var(--border-strong); box-shadow: var(--shadow); }
+  .ed[contenteditable="false"] { background: var(--rail); color: var(--secondary); }
+  .ed p { margin: 0 0 12px; } .ed p:last-child { margin-bottom: 0; }
+  .ed ::selection { background: var(--sel); }
+  .cite { display: inline-block; font-family: var(--mono); font-size: 11.5px; color: var(--blue); background: var(--blue-soft); border-radius: 5px; padding: 0 5px; margin: 0 1px; vertical-align: 1px; cursor: pointer; user-select: none; transition: background .15s, color .15s; }
+  .cite:hover, .cite.hi { background: var(--accent-soft); color: var(--accent-ink); }
+  .cite.missing { background: var(--bad-soft); color: var(--bad); }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* owner actions */
+  .acts { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .act { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: start; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+  .act:last-child { border-bottom: 0; }
+  .act input[type=checkbox] { width: 16px; height: 16px; margin-top: 4px; accent-color: var(--accent); cursor: pointer; }
+  .act .txt { font-size: 14.5px; line-height: 1.5; outline: none; padding: 2px 4px; border-radius: 6px; }
+  .act .txt:focus { background: var(--ground); }
+  .act.off .txt { color: var(--muted); text-decoration: line-through; }
+  .act .rm { opacity: 0; } .act:hover .rm { opacity: 1; }
+  .add { padding: 8px 14px; }
+
+  /* numbers rail */
+  .num-block { margin-bottom: 18px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; table-layout: fixed; }
+  th, td { text-align: left; padding: 5px 4px; border-bottom: 1px solid var(--border); vertical-align: top; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  td.bad { color: var(--bad); font-weight: 500; }
+  td.ref { font-family: var(--mono); color: var(--blue); font-size: 12px; cursor: pointer; }
+  td.ref:hover { text-decoration: underline; }
+  .kv { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; font-size: 13px; }
+  .kv .v { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+  .kv .v.good { color: var(--good); } .kv .v.bad { color: var(--bad); }
+  .hist { font-size: 12px; color: var(--secondary); }
+  .hist div { padding: 4px 0; border-bottom: 1px dashed var(--border); display: flex; justify-content: space-between; gap: 8px; }
+  .hist .mono { color: var(--muted); }
+
+  /* overlay */
+  .overlay { position: fixed; inset: 0; background: rgba(17,19,18,.45); display: none; align-items: center; justify-content: center; z-index: 40; padding: 20px; }
+  .overlay.on { display: flex; }
+  .modal { background: var(--surface); border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); width: min(560px, 100%); padding: 24px 26px; }
+  .modal h3 { margin: 0 0 8px; font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+  .modal p { margin: 0 0 12px; color: var(--secondary); }
+  .modal ul { margin: 0 0 14px; padding-left: 18px; font-size: 14px; }
+  .modal .warn { background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 8px 12px; font-size: 13px; margin-bottom: 12px; }
+  .modal .row { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+  .modal.wide { width: min(1000px, 100%); height: min(88vh, 900px); display: flex; flex-direction: column; padding: 0; overflow: hidden; }
+  .modal.wide .bar { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .modal.wide iframe { flex: 1; border: 0; width: 100%; background: #FAFAF7; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: var(--ink); color: var(--ground); padding: 10px 16px; border-radius: 999px; font-size: 13.5px; opacity: 0; transition: opacity .25s, transform .25s; z-index: 50; pointer-events: none; }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+  .approved-banner { display: none; margin: 16px 0 0; padding: 12px 16px; border-radius: 10px; background: var(--good-soft); color: var(--good); font-size: 14px; }
+  .approved-banner.on { display: block; }
+  .approved-banner a { color: inherit; font-weight: 500; }
+  kbd { font-family: var(--mono); font-size: 11px; border: 1px solid var(--border-strong); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; color: var(--secondary); }
+
+  @media (max-width: 1180px) { .layout { grid-template-columns: 260px minmax(0, 1fr); } .rail.right { display: none; } }
+  @media (max-width: 820px) { .layout { grid-template-columns: 1fr; } .rail { position: static; height: auto; max-height: 40vh; } .editor { padding: 20px 18px 80px; } .top { grid-template-columns: 1fr; gap: 8px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#"><span class="dot"></span>Fieldstack<span class="sub">Review</span></a>
+  <div class="mid">
+    <select id="draftSel" aria-label="Draft"></select>
+    <span class="pill draft" id="status">Draft</span>
+    <span class="pill sample" id="samplePill" hidden>Sample data</span>
+    <span class="timer">PX edits <b id="timer">0 min</b></span>
+    <span class="saved" id="savedAt">Not saved</span>
+  </div>
+  <div class="actions">
+    <button class="btn ghost" id="btnPreview">Preview</button>
+    <button class="btn" id="btnSave" title="Ctrl+S">Save draft</button>
+    <button class="btn accent" id="btnApprove">Approve and send</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="rail" id="leftRail">
+    <h4>Behind this section <span id="railCtx">Executive summary</span></h4>
+    <div id="cites"></div>
+  </aside>
+
+  <main class="editor">
+    <div class="doc-head">
+      <div class="k" id="docKind">Monthly owner report</div>
+      <h1 id="docTitle">Loading…</h1>
+      <div class="to" id="docTo"></div>
+    </div>
+    <div class="approved-banner" id="approvedBanner"></div>
+    <div class="attn" id="attn"><div class="k">Requires attention</div><ul id="attnList"></ul><div class="note">Computed from the records. Not editable here; fix the source record to change it.</div></div>
+
+    <section class="sec" data-sec="executive_summary">
+      <div class="sec-head"><h2>Executive summary <span class="mod"></span></h2><div class="tools"><span class="stat"></span><button class="btn sm ghost" data-act="reset">Reset</button><button class="btn sm ghost" data-act="regen">Regenerate</button></div></div>
+      <div class="ed" contenteditable="true" spellcheck="true"></div>
+    </section>
+
+    <section class="sec" data-sec="owner_actions">
+      <div class="sec-head"><h2>Owner decisions requested <span class="mod"></span></h2><div class="tools"><span class="stat"></span><button class="btn sm ghost" data-act="reset">Reset</button></div></div>
+      <div class="acts" id="acts"></div>
+      <div class="hint">Unchecked items are left out of the sent report. Click a line to edit it.</div>
+    </section>
+
+    <section class="sec" data-sec="progress_narrative">
+      <div class="sec-head"><h2>Progress this period <span class="mod"></span></h2><div class="tools"><span class="stat"></span><button class="btn sm ghost" data-act="reset">Reset</button><button class="btn sm ghost" data-act="regen">Regenerate</button></div></div>
+      <div class="ed" contenteditable="true" spellcheck="true"></div>
+    </section>
+
+    <section class="sec" data-sec="open_items_commentary">
+      <div class="sec-head"><h2>Open items <span class="mod"></span></h2><div class="tools"><span class="stat"></span><button class="btn sm ghost" data-act="reset">Reset</button><button class="btn sm ghost" data-act="regen">Regenerate</button></div></div>
+      <div class="ed" contenteditable="true" spellcheck="true"></div>
+    </section>
+
+    <section class="sec" data-sec="look_ahead">
+      <div class="sec-head"><h2>Look ahead <span class="mod"></span></h2><div class="tools"><span class="stat"></span><button class="btn sm ghost" data-act="reset">Reset</button><button class="btn sm ghost" data-act="regen">Regenerate</button></div></div>
+      <div class="ed" contenteditable="true" spellcheck="true"></div>
+    </section>
+
+    <p class="hint" style="margin-top:28px">Citations are chips. Type around them; they stay attached to the sentence. Click one to see the record. <kbd>Ctrl</kbd> <kbd>S</kbd> saves.</p>
+  </main>
+
+  <aside class="rail right" id="rightRail">
+    <div class="num-block"><h4>Money</h4><div class="kv" id="money"></div></div>
+    <div class="num-block"><h4>Open items</h4><table id="openTbl"><thead><tr><th style="width:34%">Ref</th><th>With</th><th class="n" style="width:22%">Bdays</th></tr></thead><tbody></tbody></table></div>
+    <div class="num-block"><h4>Schedule</h4><table id="msTbl"><thead><tr><th style="width:52%">Milestone</th><th class="n">Current</th><th class="n" style="width:18%">Var</th></tr></thead><tbody></tbody></table></div>
+    <div class="num-block"><h4>Field</h4><div class="kv" id="field"></div></div>
+    <div class="num-block"><h4>Sources</h4><div class="kv" id="sources"></div></div>
+    <div class="num-block"><h4>History</h4><div class="hist" id="hist"></div></div>
+  </aside>
+</div>
+
+<div class="overlay" id="ovApprove"><div class="modal">
+  <h3>Approve and send</h3>
+  <p>This locks the draft, writes the final report, and runs the configured deliveries.</p>
+  <div id="approveWarn"></div>
+  <p style="margin-bottom:4px">Recipients</p><ul id="approveTo"></ul>
+  <div class="row"><button class="btn" id="approveCancel">Back</button><button class="btn accent" id="approveGo">Approve and send</button></div>
+</div></div>
+
+<div class="overlay" id="ovPreview"><div class="modal wide">
+  <div class="bar"><span>Preview of the current edits</span><button class="btn sm" id="previewClose">Close</button></div>
+  <iframe id="previewFrame" title="Report preview"></iframe>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+  var SECS = ['executive_summary', 'progress_narrative', 'open_items_commentary', 'look_ahead'];
+  var CITE_RE = /\(((?:RFI|SUB|PCO|CO|LOG|MS|SOV)-[A-Za-z0-9.\-]+(?:,\s*(?:RFI|SUB|PCO|CO|LOG|MS|SOV)-[A-Za-z0-9.\-]+)*)\)/g;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var money = function (n) { return '$' + Math.round(+n || 0).toLocaleString('en-US'); };
+  var md = function (iso) { return iso ? iso.slice(5, 10).replace('-', '/') : '—'; };
+
+  // ---------- API adapters ----------
+  var http = {
+    list: function () { return fetch('/api/drafts').then(function (r) { return r.json(); }); },
+    get: function (id) { return fetch('/api/drafts/' + id).then(function (r) { return r.json(); }); },
+    save: function (id, body) { return fetch('/api/drafts/' + id, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(function (r) { return r.json(); }); },
+    regenerate: function (id) { return fetch('/api/drafts/' + id + '/regenerate', { method: 'POST' }).then(function (r) { return r.json(); }); },
+    approve: function (id) { return fetch('/api/drafts/' + id + '/approve', { method: 'POST' }).then(function (r) { return r.json(); }); },
+    preview: function (id) { return fetch('/api/drafts/' + id + '/preview.html').then(function (r) { return r.text(); }); },
+    finalUrl: function (id) { return '/api/drafts/' + id + '/final.html'; }
+  };
+  var embedded = (function () {
+    var seed = window.FIELDSTACK_DRAFT;
+    if (!seed) return null;
+    var key = 'fs-review-' + seed.id;
+    function load() { try { var s = localStorage.getItem(key); if (s) return JSON.parse(s); } catch (e) {} return JSON.parse(JSON.stringify(seed)); }
+    function store(d) { try { localStorage.setItem(key, JSON.stringify(d)); } catch (e) {} }
+    function narr(d) { return { executive_summary: d.edits.executive_summary, progress_narrative: d.edits.progress_narrative, open_items_commentary: d.edits.open_items_commentary, look_ahead: d.edits.look_ahead, owner_actions: d.edits.owner_actions.filter(function (a) { return a.include && a.text.trim(); }).map(function (a) { return a.text; }) }; }
+    function renderHtml(d) {
+      var n = narr(d), f = d.facts;
+      var cite = function (t) { return esc(t).replace(CITE_RE, function (m, inner) { return '(' + inner.split(',').map(function (x) { x = x.trim(); var l = d.links[x]; return l ? '<a style="color:#1F4E79;font-family:monospace;font-size:12px" href="' + esc(l) + '">' + esc(x) + '</a>' : '<span style="color:#1F4E79;font-family:monospace;font-size:12px">' + esc(x) + '</span>'; }).join(', ') + ')'; }); };
+      var paras = function (t) { return t.split(/\n\n+/).map(function (p) { return '<p>' + cite(p) + '</p>'; }).join(''); };
+      return '<!doctype html><html><head><meta charset="utf-8"><title>' + esc(d.title) + '</title><style>body{font:15px/1.55 "Instrument Sans",Segoe UI,Helvetica,Arial,sans-serif;color:#171A19;background:#FAFAF7;margin:0}.p{max-width:820px;margin:0 auto;padding:36px 28px 80px}h1{font-size:28px;margin:0 0 4px}h2{font-size:19px;margin:28px 0 8px;padding-bottom:6px;border-bottom:1.5px solid #171A19}.b{background:#E85D04;color:#fff;padding:8px 12px;font-weight:600;margin-bottom:18px}.k{font:11px monospace;letter-spacing:.1em;text-transform:uppercase;color:#5F6662}ul{padding-left:20px}.at{border-left:3px solid #E85D04;background:#F0F0EB;padding:10px 14px}p{max-width:70ch}</style></head><body><div class="p">' +
+        (d.sample ? '<div class="b">SAMPLE DATA. Invented fixture data for a fictional project.</div>' : '') +
+        '<div class="k">Monthly owner report · ' + esc(d.period_label) + '</div><h1>' + esc(d.project_name) + '</h1><div class="k">Prepared for ' + esc(d.recipients.join(', ')) + ' · Report date ' + esc(d.as_of) + '</div>' +
+        '<h2>Executive summary</h2>' + paras(n.executive_summary) +
+        (f.attention && f.attention.length ? '<div class="at"><b>Requires attention</b><ul>' + f.attention.map(function (a) { return '<li>' + cite(a) + '</li>'; }).join('') + '</ul></div>' : '') +
+        '<h2>Owner decisions requested</h2><ul>' + n.owner_actions.map(function (a) { return '<li>' + cite(a) + '</li>'; }).join('') + '</ul>' +
+        '<h2>Progress this period</h2>' + paras(n.progress_narrative) +
+        '<h2>Open items</h2>' + paras(n.open_items_commentary) +
+        '<h2>Look ahead</h2>' + paras(n.look_ahead) +
+        '<p class="k" style="margin-top:40px">Preview rendered in the browser from the current edits. The server build includes schedule and cost tables.</p></div></body></html>';
+    }
+    return {
+      list: function () { var d = load(); return Promise.resolve([{ id: d.id, title: d.title, status: d.status, as_of: d.as_of, project_name: d.project_name, period_label: d.period_label, edit_seconds: d.edit_seconds, sample: d.sample }]); },
+      get: function () { return Promise.resolve(load()); },
+      save: function (id, body) { var d = load(); if (d.status === 'approved') return Promise.resolve({ error: 'approved' }); SECS.forEach(function (k) { if (typeof body.edits[k] === 'string') d.edits[k] = body.edits[k]; }); if (body.edits.owner_actions) d.edits.owner_actions = body.edits.owner_actions; if (body.edit_seconds != null) d.edit_seconds = Math.max(d.edit_seconds, body.edit_seconds); d.updated_at = new Date().toISOString().slice(0, 19); d.history.push({ at: d.updated_at, event: 'saved' }); store(d); return Promise.resolve({ ok: true, updated_at: d.updated_at, edit_seconds: d.edit_seconds }); },
+      regenerate: function () { var d = load(); return Promise.resolve(d.narrative); },
+      approve: function () { var d = load(); d.status = 'approved'; d.updated_at = new Date().toISOString().slice(0, 19); d.history.push({ at: d.updated_at, event: 'approved', deliveries: ['(standalone demo: nothing sent)'] }); d.approved_html = renderHtml(d); store(d); return Promise.resolve({ status: 'approved', path: 'standalone demo', deliveries: ['nothing sent in the standalone demo'] }); },
+      preview: function () { return Promise.resolve(renderHtml(load())); },
+      finalUrl: function () { return null; },
+      reset: function () { try { localStorage.removeItem(key); } catch (e) {} }
+    };
+  })();
+  var api = embedded || http;
+
+  // ---------- state ----------
+  var draft = null, dirty = false, editSeconds = 0, lastActivity = Date.now(), saveTimer = null, activeSec = 'executive_summary', index = {};
+
+  function buildIndex(d) {
+    var f = d.facts, ix = {};
+    var add = function (kind, r) { ix[r.ref] = Object.assign({}, r, { kind: kind }); };
+    (f.rfis_overdue || []).forEach(function (r) { add('RFI', r); });
+    (f.submittals_overdue || []).concat(f.submittals_critical_open || []).forEach(function (r) { add('Submittal', r); });
+    (f.change_orders_pending || []).forEach(function (r) { add('Change order', r); });
+    (f.milestones || []).forEach(function (r) { add('Milestone', r); });
+    (f.budget_lines || []).forEach(function (r) { add('Schedule of values', r); });
+    (f.work_log || []).forEach(function (r) { add('Daily log', r); });
+    (f.safety_events || []).forEach(function (r) { if (!ix[r.ref]) add('Daily log', r); else ix[r.ref].safety = r.description; });
+    ix['SOV'] = { kind: 'Totals', ref: 'SOV', totals: true };
+    return ix;
+  }
+
+  // ---------- citation-aware editor ----------
+  function toHtml(text) {
+    return text.split(/\n\n+/).map(function (p) {
+      var h = esc(p).replace(CITE_RE, function (m, inner) {
+        return '(' + inner.split(',').map(function (x) { x = x.trim(); var miss = !index[x] ? ' missing' : ''; return '<span class="cite' + miss + '" contenteditable="false" data-ref="' + esc(x) + '">' + esc(x) + '</span>'; }).join(', ') + ')';
+      });
+      return '<p>' + (h || '<br>') + '</p>';
+    }).join('');
+  }
+  function fromHtml(el) {
+    var out = [];
+    function walk(node, buf) {
+      Array.prototype.forEach.call(node.childNodes, function (n) {
+        if (n.nodeType === 3) buf.push(n.nodeValue);
+        else if (n.nodeType === 1) {
+          if (n.classList && n.classList.contains('cite')) buf.push(n.getAttribute('data-ref'));
+          else if (n.tagName === 'BR') buf.push('\n');
+          else if (n.tagName === 'P' || n.tagName === 'DIV') { var b = []; walk(n, b); out.push(b.join('')); return; }
+          else walk(n, buf);
+        }
+      });
+    }
+    var top = [];
+    walk(el, top);
+    if (top.join('').trim()) out.unshift(top.join(''));
+    return out.map(function (p) { return p.replace(/ /g, ' ').replace(/[ \t]+\n/g, '\n').trim(); }).filter(Boolean).join('\n\n');
+  }
+  function refsIn(text) { var s = {}, m; CITE_RE.lastIndex = 0; while ((m = CITE_RE.exec(text))) m[1].split(',').forEach(function (x) { s[x.trim()] = 1; }); return Object.keys(s); }
+
+  function secEl(k) { return $('section[data-sec="' + k + '"]'); }
+  function edEl(k) { return $('.ed', secEl(k)); }
+  function currentText(k) { return fromHtml(edEl(k)); }
+  function setSection(k, text) { edEl(k).innerHTML = toHtml(text); refreshStat(k); }
+  function refreshStat(k) {
+    var t = currentText(k), refs = refsIn(t), words = t.split(/\s+/).filter(Boolean).length;
+    var miss = refs.filter(function (r) { return !index[r]; });
+    $('.stat', secEl(k)).textContent = words + ' words · ' + refs.length + ' cites' + (miss.length ? ' · ' + miss.length + ' unknown' : '');
+    $('.mod', secEl(k)).classList.toggle('on', t !== (draft.narrative[k] || ''));
+  }
+
+  // ---------- owner actions ----------
+  function renderActs() {
+    var host = $('#acts'); host.innerHTML = '';
+    draft.edits.owner_actions.forEach(function (a, i) {
+      var row = document.createElement('div'); row.className = 'act' + (a.include ? '' : ' off');
+      row.innerHTML = '<input type="checkbox" ' + (a.include ? 'checked' : '') + ' aria-label="Include"><div class="txt" contenteditable="true">' + toHtml(a.text).replace(/^<p>|<\/p>$/g, '') + '</div><button class="btn sm ghost rm" title="Remove">×</button>';
+      row.querySelector('input').addEventListener('change', function (e) { a.include = e.target.checked; row.classList.toggle('off', !a.include); markDirty('owner_actions'); });
+      var txt = row.querySelector('.txt');
+      txt.addEventListener('input', function () { a.text = fromHtml(txt); markDirty('owner_actions'); });
+      txt.addEventListener('focus', function () { setActive('owner_actions'); });
+      row.querySelector('.rm').addEventListener('click', function () { draft.edits.owner_actions.splice(i, 1); renderActs(); markDirty('owner_actions'); });
+      host.appendChild(row);
+    });
+    var add = document.createElement('div'); add.className = 'add'; add.innerHTML = '<button class="btn sm">+ Add a decision</button>';
+    add.querySelector('button').addEventListener('click', function () { draft.edits.owner_actions.push({ text: 'Ask the owner to … (REF)', include: true }); renderActs(); markDirty('owner_actions'); var last = $$('#acts .txt').pop(); if (last) last.focus(); });
+    host.appendChild(add);
+    var orig = JSON.stringify(draft.narrative.owner_actions || []), cur = JSON.stringify(draft.edits.owner_actions.map(function (a) { return a.text; }));
+    $('.mod', secEl('owner_actions')).classList.toggle('on', orig !== cur || draft.edits.owner_actions.some(function (a) { return !a.include; }));
+    $('.stat', secEl('owner_actions')).textContent = draft.edits.owner_actions.filter(function (a) { return a.include; }).length + ' of ' + draft.edits.owner_actions.length + ' included';
+  }
+
+  // ---------- left rail ----------
+  function card(ref) {
+    var r = index[ref];
+    if (!r) return '<div class="card missing"><div class="ref">' + esc(ref) + '<span class="kind">not in facts</span></div><div class="m">This citation does not match any computed record. Check the ref or remove it before sending.</div></div>';
+    var f = draft.facts, body = '';
+    if (r.totals) body = '<div class="t">Contract and cost totals</div><div class="m">Revised contract <b>' + money(f.revised_contract) + '</b><br>Cost to date <b>' + money(f.cost_to_date) + '</b> · billed <b>' + money(f.billed_to_date) + '</b><br>Projected <b>' + money(f.projected_cost) + '</b> · <span class="' + (f.projected_variance >= 0 ? 'good' : 'bad') + '">' + money(Math.abs(f.projected_variance)) + (f.projected_variance >= 0 ? ' under' : ' over') + '</span><br>Complete (SOV) <b>' + Math.round(f.percent_complete_sov * 100) + '%</b></div>';
+    else if (r.kind === 'RFI' || r.kind === 'Submittal' || r.kind === 'Change order') body = '<div class="t">' + esc(r.title) + '</div><div class="m">With <b>' + esc(r.ball_in_court) + '</b> since ' + md(r.opened) + (r.due ? ' · due ' + md(r.due) : '') + '<br>' + (r.days_overdue_bdays > 0 ? '<span class="bad">' + r.days_overdue_bdays + ' business days ' + (r.kind === 'Change order' ? 'pending' : 'overdue') + '</span>' : 'not yet due') + (r.amount ? ' · <b>' + money(r.amount) + '</b>' : '') + (r.schedule_impact ? ' · schedule impact' : '') + (r.cost_impact && r.kind !== 'Change order' ? ' · cost impact' : '') + '</div>';
+    else if (r.kind === 'Milestone') body = '<div class="t">' + esc(r.name) + '</div><div class="m">Baseline ' + md(r.baseline) + ' · current <b>' + md(r.actual || r.current) + '</b> · <span class="' + (r.variance_days > 0 ? 'bad' : 'good') + '">' + (r.variance_days > 0 ? '+' : '') + r.variance_days + ' days</span> · ' + esc(r.status) + '</div>';
+    else if (r.kind === 'Schedule of values') body = '<div class="t">' + esc(r.code) + ' ' + esc(r.description) + '</div><div class="m">Revised <b>' + money(r.revised) + '</b> · committed ' + money(r.committed) + '<br>Cost to date <b>' + money(r.cost_to_date) + '</b> · billed ' + money(r.billed_to_date) + ' · <b>' + Math.round(r.percent_complete * 100) + '%</b> complete</div>';
+    else if (r.kind === 'Daily log') body = '<div class="t">' + md(r.date) + (r.headcount != null ? ' · ' + r.headcount + ' on site' : '') + '</div><div class="m">' + esc(r.work || r.description || '') + (r.safety ? '<br><b>Safety:</b> ' + esc(r.safety) : '') + '</div>';
+    var link = draft.links && draft.links[ref];
+    return '<div class="card" data-ref="' + esc(ref) + '"><div class="ref">' + esc(ref) + '<span class="kind">' + esc(r.kind) + '</span></div>' + body + (link ? '<a class="open" href="' + esc(link) + '" target="_blank" rel="noopener">Open in Procore ↗</a>' : '') + '</div>';
+  }
+  function refreshRail() {
+    var label = { executive_summary: 'Executive summary', owner_actions: 'Owner decisions', progress_narrative: 'Progress', open_items_commentary: 'Open items', look_ahead: 'Look ahead' }[activeSec];
+    $('#railCtx').textContent = label;
+    var text = activeSec === 'owner_actions' ? draft.edits.owner_actions.map(function (a) { return a.text; }).join(' ') : currentText(activeSec);
+    var refs = refsIn(text);
+    $('#cites').innerHTML = refs.length ? refs.map(card).join('') : '<div class="empty">No citations in this section yet. Every sentence with a number needs one.</div>';
+  }
+  function setActive(k) { if (k === activeSec) return; activeSec = k; $$('.ed').forEach(function (e) { e.classList.remove('active'); }); if (edEl(k)) edEl(k).classList.add('active'); refreshRail(); }
+  function highlight(ref) {
+    $$('.card').forEach(function (c) { c.classList.toggle('hi', c.getAttribute('data-ref') === ref); });
+    $$('.cite').forEach(function (c) { c.classList.toggle('hi', c.getAttribute('data-ref') === ref); });
+    var c = $('.card[data-ref="' + ref + '"]'); if (c) c.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  // ---------- right rail ----------
+  function renderNumbers() {
+    var f = draft.facts;
+    $('#money').innerHTML = [['Revised contract', money(f.revised_contract), ''], ['Cost to date', money(f.cost_to_date), ''], ['Billed to date', money(f.billed_to_date), ''], ['Projected', money(f.projected_cost), ''], ['Variance', money(Math.abs(f.projected_variance)) + (f.projected_variance >= 0 ? ' under' : ' over'), f.projected_variance >= 0 ? 'good' : 'bad'], ['Pending changes', money(f.pending_changes), ''], ['Complete (SOV)', Math.round(f.percent_complete_sov * 100) + '%', '']].map(function (r) { return '<span>' + r[0] + '</span><span class="v ' + r[2] + '">' + r[1] + '</span>'; }).join('');
+    var items = (f.rfis_overdue || []).concat(f.submittals_overdue || [], f.change_orders_pending || []);
+    $('#openTbl tbody').innerHTML = items.map(function (r) { return '<tr><td class="ref" data-ref="' + esc(r.ref) + '" title="' + esc(r.title) + '">' + esc(r.ref) + '</td><td title="' + esc(r.ball_in_court) + '">' + esc(r.ball_in_court) + '</td><td class="n' + (r.days_overdue_bdays > 0 ? ' bad' : '') + '">' + r.days_overdue_bdays + '</td></tr>'; }).join('') || '<tr><td colspan="3" class="empty">None</td></tr>';
+    $('#msTbl tbody').innerHTML = (f.milestones || []).map(function (m) { return '<tr><td class="ref" data-ref="' + esc(m.ref) + '" title="' + esc(m.name) + '">' + esc(m.name) + '</td><td class="n">' + md(m.actual || m.current) + '</td><td class="n' + (m.variance_days > 0 ? ' bad' : '') + '">' + (m.variance_days > 0 ? '+' : '') + m.variance_days + '</td></tr>'; }).join('');
+    $('#field').innerHTML = [['Working days', f.working_days], ['Avg headcount', f.avg_headcount], ['Peak headcount', f.peak_headcount], ['Weather hours lost', f.weather_delay_hours], ['RFIs opened / closed', f.rfis_opened + ' / ' + f.rfis_closed], ['Avg RFI response (bdays)', f.rfi_avg_response_bdays == null ? '—' : f.rfi_avg_response_bdays]].map(function (r) { return '<span>' + r[0] + '</span><span class="v">' + r[1] + '</span>'; }).join('');
+    $('#sources').innerHTML = Object.keys(draft.sources || {}).map(function (k) { return '<span>' + esc(k.replace('_', ' ')) + '</span><span class="v">' + esc(draft.sources[k]) + '</span>'; }).join('');
+    $('#hist').innerHTML = (draft.history || []).slice().reverse().map(function (h) { return '<div><span>' + esc(h.event) + (h.by ? ' · ' + esc(h.by) : '') + (h.deliveries && h.deliveries.length ? ' · ' + esc(h.deliveries.join('; ')) : '') + '</span><span class="mono">' + esc((h.at || '').replace('T', ' ').slice(5, 16)) + '</span></div>'; }).join('');
+    $$('#rightRail td.ref').forEach(function (td) { td.addEventListener('click', function () { highlight(td.getAttribute('data-ref')); }); });
+  }
+
+  // ---------- save / dirty / timer ----------
+  function markDirty(k) {
+    dirty = true; lastActivity = Date.now();
+    $('#savedAt').textContent = 'Unsaved changes'; $('#savedAt').classList.add('dirty');
+    if (k && k !== 'owner_actions') refreshStat(k); else if (k === 'owner_actions') renderActs();
+    if (k === activeSec) refreshRail();
+    clearTimeout(saveTimer); saveTimer = setTimeout(save, 2500);
+  }
+  function collect() { var e = {}; SECS.forEach(function (k) { e[k] = currentText(k); }); e.owner_actions = draft.edits.owner_actions; return e; }
+  function save() {
+    if (!draft || draft.status === 'approved') return Promise.resolve();
+    var edits = collect();
+    return api.save(draft.id, { edits: edits, edit_seconds: editSeconds }).then(function (r) {
+      if (r && r.ok) { dirty = false; SECS.forEach(function (k) { draft.edits[k] = edits[k]; }); $('#savedAt').textContent = 'Saved ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); $('#savedAt').classList.remove('dirty'); }
+      else toast('Save failed: ' + (r && r.error || 'unknown'));
+    }).catch(function () { toast('Save failed: server unreachable'); });
+  }
+  setInterval(function () {
+    if (draft && draft.status !== 'approved' && document.visibilityState === 'visible' && Date.now() - lastActivity < 60000) editSeconds++;
+    $('#timer').textContent = Math.round(editSeconds / 60) + ' min';
+  }, 1000);
+  ['keydown', 'mousedown', 'scroll'].forEach(function (ev) { document.addEventListener(ev, function () { lastActivity = Date.now(); }, { passive: true }); });
+  document.addEventListener('keydown', function (e) { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save().then(function () { toast('Draft saved'); }); } });
+
+  function toast(msg) { var t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(t._h); t._h = setTimeout(function () { t.classList.remove('on'); }, 2200); }
+
+  // ---------- load ----------
+  function lock(on) { $$('.ed').forEach(function (e) { e.setAttribute('contenteditable', on ? 'false' : 'true'); }); $$('#acts .txt').forEach(function (e) { e.setAttribute('contenteditable', on ? 'false' : 'true'); }); $$('#acts input, #acts button, .tools button').forEach(function (b) { b.disabled = on; }); $('#btnSave').disabled = on; $('#btnApprove').disabled = on; }
+  function render() {
+    var d = draft; index = buildIndex(d);
+    $('#docTitle').textContent = d.project_name + ' · ' + d.period_label;
+    $('#docKind').textContent = 'Monthly owner report · as of ' + d.as_of + ' · ' + (d.people.px ? 'PX ' + d.people.px + ' · ' : '') + d.people.gc;
+    $('#docTo').textContent = 'To ' + d.recipients.join(', ');
+    $('#status').textContent = d.status === 'approved' ? 'Approved' : 'Draft'; $('#status').className = 'pill ' + (d.status === 'approved' ? 'approved' : 'draft');
+    $('#samplePill').hidden = !d.sample;
+    editSeconds = d.edit_seconds || 0;
+    $('#attnList').innerHTML = (d.facts.attention || []).map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') || '<li>Nothing overdue.</li>';
+    SECS.forEach(function (k) { setSection(k, d.edits[k] || ''); });
+    renderActs(); renderNumbers(); refreshRail();
+    var banner = $('#approvedBanner'); banner.classList.toggle('on', d.status === 'approved');
+    if (d.status === 'approved') { var u = api.finalUrl(d.id); banner.innerHTML = 'Approved ' + esc((d.updated_at || '').replace('T', ' ')) + '. Edits are closed.' + (u ? ' <a href="' + u + '" target="_blank" rel="noopener">Open the sent report ↗</a>' : ''); }
+    lock(d.status === 'approved');
+    $('#savedAt').textContent = 'Saved ' + (d.updated_at || '').replace('T', ' ').slice(5, 16); $('#savedAt').classList.remove('dirty'); dirty = false;
+  }
+  function loadDraft(id) { return api.get(id).then(function (d) { if (d.error) { toast(d.error); return; } draft = d; render(); }); }
+  api.list().then(function (list) {
+    var sel = $('#draftSel'); sel.innerHTML = list.map(function (d) { return '<option value="' + esc(d.id) + '">' + esc(d.project_name || d.id) + ' · ' + esc(d.period_label || d.as_of) + (d.status === 'approved' ? ' (approved)' : '') + '</option>'; }).join('');
+    if (!list.length) { $('#docTitle').textContent = 'No drafts yet. Run python run.py first.'; return; }
+    var want = location.hash.slice(1); if (want && list.some(function (d) { return d.id === want; })) sel.value = want;
+    loadDraft(sel.value);
+    sel.addEventListener('change', function () { if (dirty) save(); location.hash = sel.value; loadDraft(sel.value); });
+  });
+
+  // ---------- editor events ----------
+  SECS.forEach(function (k) {
+    var ed = edEl(k);
+    ed.addEventListener('input', function () { markDirty(k); });
+    ed.addEventListener('focus', function () { setActive(k); });
+    ed.addEventListener('paste', function (e) { e.preventDefault(); var t = (e.clipboardData || window.clipboardData).getData('text/plain'); document.execCommand('insertText', false, t); });
+    ed.addEventListener('click', function (e) { var c = e.target.closest('.cite'); if (c) { highlight(c.getAttribute('data-ref')); } });
+  });
+  document.addEventListener('selectionchange', function () { var s = document.getSelection(); if (!s || !s.anchorNode) return; var sec = (s.anchorNode.nodeType === 1 ? s.anchorNode : s.anchorNode.parentElement).closest('section.sec'); if (sec) setActive(sec.getAttribute('data-sec')); });
+  $$('.tools button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.closest('section').getAttribute('data-sec'), act = b.getAttribute('data-act');
+      if (act === 'reset') { if (k === 'owner_actions') { draft.edits.owner_actions = (draft.narrative.owner_actions || []).map(function (t) { return { text: t, include: true }; }); renderActs(); } else setSection(k, draft.narrative[k] || ''); markDirty(k); toast('Reset to the generated text'); }
+      if (act === 'regen') { b.disabled = true; b.textContent = 'Writing…'; api.regenerate(draft.id).then(function (n) { if (n.error) throw new Error(n.error); setSection(k, n[k] || ''); markDirty(k); toast('Section regenerated. Reset returns to the original.'); }).catch(function (e) { toast('Regenerate failed: ' + e.message); }).then(function () { b.disabled = false; b.textContent = 'Regenerate'; }); }
+    });
+  });
+
+  // ---------- preview / approve ----------
+  $('#btnSave').addEventListener('click', function () { save().then(function () { toast('Draft saved'); }); });
+  $('#btnPreview').addEventListener('click', function () { save().then(function () { return api.preview(draft.id); }).then(function (html) { $('#previewFrame').srcdoc = html; $('#ovPreview').classList.add('on'); }); });
+  $('#previewClose').addEventListener('click', function () { $('#ovPreview').classList.remove('on'); });
+  $('#btnApprove').addEventListener('click', function () {
+    var warns = [];
+    SECS.forEach(function (k) { var t = currentText(k), refs = refsIn(t); if (!t.trim()) warns.push('The ' + k.replace(/_/g, ' ') + ' section is empty.'); refs.filter(function (r) { return !index[r]; }).forEach(function (r) { warns.push(r + ' in ' + k.replace(/_/g, ' ') + ' does not match a computed record.'); }); if (/\d/.test(t) && !refs.length) warns.push('The ' + k.replace(/_/g, ' ') + ' section has numbers but no citations.'); });
+    if (draft.edits.owner_actions.some(function (a) { return a.include && /\(REF\)/.test(a.text); })) warns.push('An owner decision still has the (REF) placeholder.');
+    $('#approveWarn').innerHTML = warns.length ? '<div class="warn">' + warns.map(esc).join('<br>') + '</div>' : '';
+    $('#approveTo').innerHTML = draft.recipients.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('');
+    $('#ovApprove').classList.add('on');
+  });
+  $('#approveCancel').addEventListener('click', function () { $('#ovApprove').classList.remove('on'); });
+  $('#approveGo').addEventListener('click', function () {
+    var b = $('#approveGo'); b.disabled = true; b.textContent = 'Sending…';
+    save().then(function () { return api.approve(draft.id); }).then(function (r) {
+      $('#ovApprove').classList.remove('on');
+      if (r.error) { toast('Approve failed: ' + r.error); return; }
+      toast('Approved. ' + (r.deliveries && r.deliveries.length ? r.deliveries.join('; ') : 'Written to the approved folder.'));
+      return loadDraft(draft.id);
+    }).catch(function (e) { toast('Approve failed: ' + e.message); }).then(function () { b.disabled = false; b.textContent = 'Approve and send'; });
+  });
+  $$('.overlay').forEach(function (o) { o.addEventListener('click', function (e) { if (e.target === o) o.classList.remove('on'); }); });
+  window.addEventListener('beforeunload', function (e) { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+})();
+</script>
+</body>
+</html>

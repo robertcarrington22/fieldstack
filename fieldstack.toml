@@ -41,6 +41,10 @@ model = "claude-opus-5"
 [store]
 path = "out/fieldstack.sqlite"
 
+[review]                      # python review.py  ->  http://127.0.0.1:8787/
+drafts = "out/drafts"
+approved = "out/approved"
+
 [[delivery]]
 kind = "file"
 dir = "out"
