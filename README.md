@@ -1,56 +1,86 @@
-# Fieldstack — Owner Report prototype
+# Fieldstack
 
-Generates a monthly owner-and-lender-facing report for a general contractor from Procore
-records. Numbers are computed deterministically in Python; Claude writes the prose around
-them and must cite the source record for every claim.
+An AI operating layer for mid-size general contractors. First module: the **Owner Report**,
+the monthly report a project executive sends to the owner, owner's rep, and construction
+lender, assembled from Procore, the accounting system, and the schedule. Every number is
+computed in code; the model writes the prose around them and cites the record behind
+every claim.
 
-This is the wedge product from the Fieldstack concept brief, repositioned per the
-Sept 4, 2026 wedge review: not an internal daily digest (Procore Helix does that), but the
-report a project executive sends to the owner, owner's rep, and construction lender.
+Demo site: https://robertcarrington22.github.io/fieldstack/ · Architecture: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Run it
 
 ```bash
 pip install -r requirements.txt
-python mock/build_fixtures.py        # regenerate the sample Procore data (already committed)
-python run.py                        # mock data, mock narrator unless credentials exist
-python run.py --narrator claude      # needs ANTHROPIC_API_KEY or `ant auth login`
+python run.py --as-of 2026-09-04                 # sample tenant, mock Procore + CSV ledger + CSV schedule
+python run.py --as-of 2026-09-04 --llm claude    # Claude writes the narrative (ANTHROPIC_API_KEY or `ant auth login`)
+python run.py --list                             # connectors and modules available
+python -m unittest discover -s tests -v          # 8 tests
 ```
 
-Output lands in `out/`: an HTML report, a Markdown version, and the computed facts as JSON.
+Output lands in `out/`: HTML report, Markdown, computed facts as JSON, and a SQLite store
+of every snapshot and run.
+
+## How a tenant is wired
+
+One TOML file per customer. Connectors declare what they provide; precedence says who
+wins when two sources overlap; modules declare what they need.
+
+```toml
+[[connectors]]
+name = "procore"
+kind = "procore"
+mode = "live"
+token = "${PROCORE_TOKEN}"
+company_id = 1234
+
+[[connectors]]
+name = "ledger"
+kind = "csv_ledger"          # or "hh2" once the customer grants access
+path = "exports/sage_jobcost.csv"
+
+[precedence]
+budget = ["ledger", "procore"]
+
+[[projects]]
+key = "tower"
+ids = { procore = 5678, ledger = "24-101" }
+```
+
+See [fieldstack.toml](fieldstack.toml) for the full sample and [ARCHITECTURE.md](ARCHITECTURE.md)
+for how to add a connector, a capability, a module, or a delivery channel.
 
 ## Layout
 
 ```
-mock/build_fixtures.py     invents one project (Bergen Street Apartments, fictional) in Procore's shapes
-mock/procore/*.json        the fixtures: project, rfis, submittals, change_orders, budget, milestones, daily_logs
-fieldstack/model.py        unified data model; every record carries a ref (RFI-041, SUB-118.R2, PCO-007, LOG-2026-08-14, MS-4, SOV-03-000)
-fieldstack/procore.py      MockProcoreClient (fixtures) and LiveProcoreClient (REST v1.0, untested) -> ProjectSnapshot
-fieldstack/metrics.py      deterministic facts: RFI aging in business days, overdue submittals, pending COs and dollars, SOV percent complete, projected cost, headcount, weather hours
-fieldstack/narrative.py    ClaudeNarrator (structured output, cited prose) and MockNarrator (template prose)
-fieldstack/render.py       HTML (print-friendly, light and dark) and Markdown
+fieldstack.toml            sample tenant config
 run.py                     CLI
+fieldstack/
+  model.py                 unified data model; every record has ref, source, link; JSON round-trip
+  connectors/              procore (mock + live), csv_ledger, csv_schedule, autodesk_build (declared), hh2 (declared)
+  snapshot.py              SnapshotBuilder: merge Partials by capability with precedence
+  store.py                 SQLite snapshot and run history
+  llm.py                   LLM gateway: Claude (structured output, adaptive thinking) or mock
+  metrics.py               deterministic facts for the Owner Report
+  narrative.py             prompt, schema, and template fallback for the Owner Report
+  render.py                HTML and Markdown
+  modules/                 owner_report; registry for the next modules
+  delivery/                file, webhook (Slack/Teams), email
+  jobs.py                  run_module(): connectors -> snapshot -> store -> module -> delivery
+mock/                      fixtures for the fictional Bergen Street Apartments job
+docs/                      GitHub Pages demo site
+tests/                     unittest suite
 ```
-
-## Design rules
-
-- **The model never computes.** Aging, dollars, percents, and dates come from `metrics.py`.
-  The narrative prompt receives those facts as JSON and is told not to invent anything.
-- **Every claim cites a record.** Citations render as links back to Procore where a link exists.
-- **Approval gate.** Nothing is sent. The PX reads and edits the HTML before it goes to the owner.
-- **Swap the source, keep the report.** `LiveProcoreClient` returns the same `ProjectSnapshot`
-  as the mock. Autodesk Build, Sage 300 CRE (via hh2), and P6 would each be another client
-  feeding the same model; the cost section is the first place accounting data would replace
-  Procore budget data.
 
 ## What a pilot needs from the customer
 
-- A Procore API token with read scope on one project (or an installed Fieldstack app once one exists in the marketplace).
-- The last two owner reports, so the narrator matches their voice (`mock/prior_owner_report_excerpt.md` shows the shape).
-- The contract's RFI and submittal response windows in business days (stored as project custom fields).
+- A Procore API token with read scope on one project.
+- The last two owner reports, so the narrator matches their voice.
+- A job-cost export from Sage or Vista (CSV) until an hh2 connection is approved.
+- The contract's RFI and submittal response windows in business days.
 
 ## Known gaps
 
-- `LiveProcoreClient` has not been run against a real tenant. Budget views and daily log sub-resources will need field mapping.
+- The live Procore client has not run against a real tenant. Budget views and daily log sub-resources will need field mapping.
+- Autodesk Build and hh2 connectors are declared with documented endpoints, not implemented.
 - Percent complete is dollar-weighted from budget line `percent_complete`; a real deployment should take it from the pay application schedule of values.
-- Weekly internal report variant not built yet; the monthly owner report is the demo.

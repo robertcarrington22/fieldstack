@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldstack</title>
+<meta name="description" content="The owner report your project executive writes by hand, assembled every month from Procore, your accounting system, and your schedule. Every number cited.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>document.documentElement.classList.replace('no-js','js');</script>
+<style>
+  :root {
+    --ground: #F3F2EE; --paper: #FFFFFF; --ink: #171A19; --steel: #5B625E; --rule: #D9D8D2; --rule-strong: #B7B8B1;
+    --orange: #E85D04; --orange-deep: #C94F00; --orange-soft: #FCE9DC; --blue: #1F4E79; --blue-soft: #E1EAF3;
+    --dark: #171A19; --dark-2: #22262A; --dark-rule: #33393D; --dark-text: #E9E9E4; --dark-muted: #9AA19C;
+    --good: #2E7D4F; --bad: #A93838;
+    --display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    --body: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", Consolas, monospace;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: var(--blue); }
+  :focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+  .mono { font-family: var(--mono); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--steel); display: inline-flex; align-items: center; gap: 10px; }
+  .eyebrow::before { content: ""; width: 22px; height: 2px; background: var(--orange); }
+  h2 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 5vw, 60px); line-height: .96; letter-spacing: -.005em; text-transform: uppercase; margin: 10px 0 18px; text-wrap: balance; }
+  .measure { max-width: 60ch; }
+  p { margin: 0 0 14px; }
+
+  /* ---------- reveal on scroll ---------- */
+  .js .rv { opacity: 0; transform: translateY(22px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+  .js .rv.in { opacity: 1; transform: none; }
+  .js .rv.d1 { transition-delay: .08s } .js .rv.d2 { transition-delay: .16s } .js .rv.d3 { transition-delay: .24s }
+  @media (prefers-reduced-motion: reduce) { .js .rv { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  /* ---------- nav ---------- */
+  .progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--orange); z-index: 60; transition: width .1s linear; }
+  nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--ground) 86%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s, background .3s; }
+  nav.solid { border-bottom-color: var(--rule); }
+  nav .bar { display: flex; align-items: center; justify-content: space-between; height: 66px; }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: .02em; text-transform: uppercase; }
+  .brand .mark { width: 30px; height: 22px; position: relative; }
+  .brand .mark i { position: absolute; left: 0; right: 0; height: 5px; background: var(--ink); transition: transform .35s var(--ease), background .35s; }
+  .brand .mark i:nth-child(1){ top:0 } .brand .mark i:nth-child(2){ top:8px; width: 70%; } .brand .mark i:nth-child(3){ top:16px; background: var(--orange); }
+  .brand:hover .mark i:nth-child(2){ transform: translateX(30%); } .brand:hover .mark i:nth-child(3){ transform: translateX(-10%); }
+  nav .links { display: flex; gap: 26px; align-items: center; font-size: 15px; font-weight: 500; }
+  nav .links a { color: var(--steel); text-decoration: none; position: relative; padding: 4px 0; }
+  nav .links a::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
+  nav .links a:hover { color: var(--ink); } nav .links a:hover::after { transform: scaleX(1); }
+
+  /* ---------- buttons ---------- */
+  .btn { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 15px 22px; font-family: var(--body); font-weight: 600; font-size: 16px; text-decoration: none; border: 2px solid var(--ink); color: var(--ink); background: transparent; cursor: pointer; overflow: hidden; isolation: isolate; transition: color .3s var(--ease), border-color .3s var(--ease), transform .2s var(--ease); }
+  .btn::before { content: ""; position: absolute; inset: 0; background: var(--ink); transform: translateY(101%); transition: transform .35s var(--ease); z-index: -1; }
+  .btn:hover { color: var(--ground); } .btn:hover::before { transform: translateY(0); }
+  .btn:active { transform: translateY(1px); }
+  .btn .arr { display: inline-block; transition: transform .3s var(--ease); }
+  .btn:hover .arr { transform: translateX(5px); }
+  .btn.primary { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .btn.primary::before { background: var(--ink); }
+  .btn.primary:hover { border-color: var(--ink); }
+  .btn.ghost-dark { border-color: var(--dark-text); color: var(--dark-text); } .btn.ghost-dark::before { background: var(--dark-text); } .btn.ghost-dark:hover { color: var(--dark); }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 72px 0 40px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+  .hero h1 { font-family: var(--display); font-weight: 800; font-size: clamp(54px, 7.4vw, 104px); line-height: .9; letter-spacing: -.01em; text-transform: uppercase; margin: 16px 0 22px; }
+  .hero h1 .o { color: var(--orange); }
+  .hero .lede { font-size: 20px; line-height: 1.5; max-width: 32em; margin-bottom: 28px; }
+  .hero .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero .proof { margin-top: 30px; display: flex; gap: 28px; flex-wrap: wrap; font-size: 14px; color: var(--steel); }
+  .hero .proof b { display: block; font-family: var(--display); font-size: 34px; line-height: 1; color: var(--ink); font-weight: 700; }
+
+  .sheet-wrap { perspective: 1400px; }
+  .sheet { background: var(--paper); border: 1px solid var(--rule); box-shadow: 0 30px 60px -30px rgba(23,26,25,.35), 0 2px 0 var(--rule); padding: 22px 24px 18px; transform: rotateX(4deg) rotateY(-8deg) rotateZ(1.2deg); transition: transform .6s var(--ease); will-change: transform; }
+  .sheet .tb { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding-bottom: 12px; border-bottom: 2px solid var(--ink); margin-bottom: 12px; }
+  .sheet .tb .k { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+  .sheet .tb .t { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; text-transform: uppercase; }
+  .sheet .kp { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+  .sheet .kp div { border: 1px solid var(--rule); padding: 8px 10px; }
+  .sheet .kp .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); }
+  .sheet .kp .v { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.05; }
+  .sheet .kp .v.o { color: var(--orange); }
+  .sheet .row { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--rule); font-size: 13.5px; }
+  .sheet .row:last-of-type { border-bottom: 0; }
+  .sheet .cite { font-family: var(--mono); font-size: 11px; color: var(--blue); }
+  .sheet .v { font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .sheet .v.bad { color: var(--bad); font-weight: 600; }
+  .sheet .stamp { position: absolute; right: 18px; bottom: 14px; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--orange); border: 1.5px solid var(--orange); padding: 3px 7px; transform: rotate(-6deg); }
+  .sheet { position: relative; }
+
+  /* ---------- ticker ---------- */
+  .ticker { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); overflow: hidden; margin: 36px 0 0; padding: 12px 0; font-family: var(--mono); font-size: 13px; color: var(--steel); white-space: nowrap; }
+  .ticker .track { display: inline-block; animation: tick 48s linear infinite; }
+  .ticker span { margin-right: 44px; } .ticker b { color: var(--ink); font-weight: 500; } .ticker i { font-style: normal; color: var(--orange); }
+  @keyframes tick { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+  .ticker:hover .track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) { .ticker .track { animation: none; } }
+
+  /* ---------- assembly (dark, sticky) ---------- */
+  .assembly { background: var(--dark); color: var(--dark-text); margin-top: 80px; }
+  .assembly .stage { height: 340vh; position: relative; }
+  .assembly .sticky { position: sticky; top: 0; height: 100vh; display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
+  .assembly .eyebrow { color: var(--dark-muted); }
+  .assembly h2 { color: var(--dark-text); }
+  .steps { list-style: none; padding: 0; margin: 26px 0 0; border-left: 2px solid var(--dark-rule); }
+  .steps li { padding: 12px 0 12px 22px; position: relative; color: var(--dark-muted); transition: color .35s; }
+  .steps li::before { content: ""; position: absolute; left: -7px; top: 20px; width: 12px; height: 12px; background: var(--dark); border: 2px solid var(--dark-rule); transition: background .35s, border-color .35s, transform .35s var(--ease); }
+  .steps li b { display: block; font-family: var(--display); font-size: 26px; font-weight: 700; text-transform: uppercase; line-height: 1; margin-bottom: 4px; color: var(--dark-muted); transition: color .35s; }
+  .steps li.on { color: var(--dark-text); } .steps li.on b { color: var(--dark-text); }
+  .steps li.on::before { background: var(--orange); border-color: var(--orange); transform: scale(1.25); }
+  .steps li span { font-size: 15.5px; }
+  .desk { position: relative; height: min(72vh, 620px); }
+  .desk .paper { position: absolute; inset: 0 8% 0 8%; margin: auto; max-width: 520px; background: var(--paper); color: var(--ink); border: 1px solid var(--rule); padding: 20px 22px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); display: flex; flex-direction: column; gap: 10px; }
+  .desk .paper .head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+  .desk .paper .head .t { font-family: var(--display); font-weight: 700; font-size: 22px; text-transform: uppercase; }
+  .desk .paper .head .k { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+  .slot { min-height: 40px; border: 1px dashed var(--rule-strong); border-radius: 2px; position: relative; display: flex; flex-direction: column; gap: 6px; padding: 8px 10px; transition: border-color .4s; }
+  .slot .lab { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+  .slot.filled { border-style: solid; border-color: var(--rule); }
+  .card { font-size: 12.5px; padding: 6px 9px; background: var(--ground); border-left: 3px solid var(--blue); display: flex; justify-content: space-between; gap: 10px; opacity: 0; transform: translate(-140px, -40px) rotate(-4deg); transition: opacity .55s var(--ease), transform .65s var(--ease); }
+  .card.ledger { border-left-color: var(--good); transform: translate(160px, 60px) rotate(5deg); }
+  .card.sched { border-left-color: var(--orange); transform: translate(120px, -90px) rotate(-6deg); }
+  .card.on { opacity: 1; transform: none; }
+  .card .ref { font-family: var(--mono); font-size: 11px; color: var(--blue); white-space: nowrap; }
+  .card.ledger .ref { color: var(--good); } .card.sched .ref { color: var(--orange); }
+  .prose { font-size: 13px; line-height: 1.5; color: var(--ink); opacity: 0; transition: opacity .6s var(--ease) .1s; }
+  .prose.on { opacity: 1; }
+  .prose .cite { font-family: var(--mono); font-size: 11px; color: var(--blue); }
+  .prose .cur { display: inline-block; width: 2px; height: 14px; background: var(--orange); vertical-align: -2px; margin-left: 2px; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { to { visibility: hidden } }
+  .sources { position: absolute; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--dark-muted); }
+  .sources.a { left: 0; top: 6%; } .sources.b { right: 0; bottom: 8%; text-align: right; } .sources.c { right: 2%; top: 4%; text-align: right; }
+  .sources i { display: block; width: 36px; height: 2px; background: var(--dark-rule); margin-top: 6px; }
+  .sources.b i, .sources.c i { margin-left: auto; }
+  .assembly .mobile-note { display: none; }
+
+  /* ---------- sample report ---------- */
+  section.pad { padding: 96px 0; }
+  .frame { margin-top: 28px; border: 2px solid var(--ink); background: var(--paper); transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+  .frame:hover { transform: translateY(-4px); box-shadow: 0 30px 50px -30px rgba(23,26,25,.4); }
+  .frame .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--rule); font-size: 14px; }
+  .frame .bar .dots { display: inline-flex; gap: 6px; margin-right: 10px; } .frame .bar .dots i { width: 9px; height: 9px; background: var(--rule-strong); border-radius: 50%; } .frame .bar .dots i:first-child { background: var(--orange); }
+  .frame iframe { width: 100%; height: 760px; border: 0; display: block; background: #FAFAF7; }
+
+  /* ---------- rules ---------- */
+  .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+  .rule-card { background: var(--paper); border: 1px solid var(--rule); padding: 26px 24px 24px; position: relative; overflow: hidden; transition: transform .4s var(--ease), border-color .4s, box-shadow .4s var(--ease); }
+  .rule-card:hover { transform: translateY(-6px); border-color: var(--ink); box-shadow: 0 24px 40px -28px rgba(23,26,25,.45); }
+  .rule-card .num { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; color: var(--steel); }
+  .rule-card h3 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; text-transform: uppercase; margin: 10px 0 12px; }
+  .rule-card p { font-size: 15.5px; margin: 0; }
+  .rule-card .stamp { position: absolute; right: 16px; top: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 4px 8px; border: 1.5px solid var(--good); color: var(--good); transform: rotate(-8deg) scale(.9); opacity: .0; transition: opacity .35s var(--ease), transform .45s var(--ease); }
+  .rule-card:hover .stamp { opacity: 1; transform: rotate(-8deg) scale(1); }
+  .rule-card .bar { position: absolute; left: 0; bottom: 0; height: 4px; width: 100%; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+  .rule-card:hover .bar { transform: scaleX(1); }
+
+  /* ---------- pilot ---------- */
+  .pilot { background: var(--paper); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .pilot .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .weeks { display: flex; gap: 0; border: 2px solid var(--ink); margin: 26px 0 18px; }
+  .weeks button { flex: 1; background: transparent; border: 0; border-right: 1px solid var(--rule); padding: 14px 6px; font-family: var(--display); font-weight: 700; font-size: 22px; text-transform: uppercase; color: var(--steel); cursor: pointer; transition: background .25s, color .25s; }
+  .weeks button:last-child { border-right: 0; }
+  .weeks button:hover { color: var(--ink); background: var(--orange-soft); }
+  .weeks button[aria-selected="true"] { background: var(--ink); color: var(--ground); }
+  .weeks button small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; font-weight: 400; margin-bottom: 2px; }
+  .week-panel { min-height: 120px; border-left: 3px solid var(--orange); padding: 4px 0 4px 18px; }
+  .week-panel h4 { font-family: var(--display); font-size: 28px; font-weight: 700; text-transform: uppercase; margin: 0 0 6px; line-height: 1; }
+  .week-panel p { margin: 0; font-size: 16px; }
+  .terms { list-style: none; padding: 0; margin: 26px 0 0; }
+  .terms li { padding: 14px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 150px 1fr; gap: 16px; font-size: 16px; }
+  .terms li:last-child { border-bottom: 1px solid var(--rule); }
+  .terms li b { font-family: var(--display); font-size: 22px; text-transform: uppercase; font-weight: 700; line-height: 1.1; }
+  .metrics { margin-top: 26px; }
+  .metric { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--rule); }
+  .metric:last-child { border-bottom: 1px solid var(--rule); }
+  .metric .v { font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; color: var(--orange); font-variant-numeric: tabular-nums; }
+  .metric .v small { font-family: var(--mono); font-size: 12px; color: var(--steel); margin-left: 4px; letter-spacing: .08em; }
+
+  /* ---------- fit ---------- */
+  .seg { display: inline-flex; border: 2px solid var(--ink); margin: 22px 0 22px; position: relative; }
+  .seg button { background: transparent; border: 0; padding: 12px 22px; font-family: var(--display); font-weight: 700; font-size: 22px; text-transform: uppercase; color: var(--steel); cursor: pointer; position: relative; z-index: 1; transition: color .25s; min-width: 150px; }
+  .seg .thumb { position: absolute; top: 0; bottom: 0; left: 0; width: 50%; background: var(--ink); transition: transform .35s var(--ease); }
+  .seg[data-on="1"] .thumb { transform: translateX(100%); }
+  .seg button.active { color: var(--ground); }
+  .fitlist { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 28px; }
+  .fitlist li { padding: 12px 0 12px 30px; border-bottom: 1px solid var(--rule); position: relative; font-size: 16px; transition: opacity .3s, transform .3s var(--ease); }
+  .fitlist li::before { content: ""; position: absolute; left: 0; top: 18px; width: 14px; height: 14px; border: 2px solid var(--good); }
+  .fitlist.no li::before { border-color: var(--bad); }
+  .fitlist li::after { content: ""; position: absolute; left: 4px; top: 22px; width: 6px; height: 6px; background: var(--good); }
+  .fitlist.no li::after { background: var(--bad); }
+  .fitlist.swap li { opacity: 0; transform: translateY(8px); }
+
+  /* ---------- roi ---------- */
+  .roi { background: var(--dark); color: var(--dark-text); }
+  .roi .eyebrow { color: var(--dark-muted); } .roi h2 { color: var(--dark-text); }
+  .roi .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .slider { margin-top: 24px; }
+  .slider label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--dark-muted); margin-bottom: 10px; }
+  .slider label output { color: var(--dark-text); font-size: 14px; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: var(--dark-rule); outline: none; margin: 10px 0 22px; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 26px; height: 26px; background: var(--orange); border: 3px solid var(--dark); box-shadow: 0 0 0 2px var(--orange); cursor: grab; transition: transform .2s var(--ease); }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  input[type=range]::-moz-range-thumb { width: 22px; height: 22px; background: var(--orange); border: 3px solid var(--dark); box-shadow: 0 0 0 2px var(--orange); cursor: grab; border-radius: 0; }
+  .roi-out { border: 1px solid var(--dark-rule); background: var(--dark-2); padding: 26px 28px; }
+  .roi-out .line { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--dark-rule); font-size: 15px; color: var(--dark-muted); }
+  .roi-out .line .v { font-family: var(--mono); color: var(--dark-text); font-variant-numeric: tabular-nums; font-size: 16px; }
+  .roi-out .big { padding-top: 18px; display: flex; justify-content: space-between; align-items: baseline; }
+  .roi-out .big .v { font-family: var(--display); font-weight: 800; font-size: 64px; line-height: 1; color: var(--orange); font-variant-numeric: tabular-nums; }
+  .roi-out .big .v.neg { color: #E08484; }
+  .roi-out .note { font-size: 13px; color: var(--dark-muted); margin: 14px 0 0; }
+
+  /* ---------- cta ---------- */
+  .cta-band { padding: 110px 0; text-align: left; }
+  .cta-band h2 { font-size: clamp(48px, 7vw, 96px); }
+  .magnet { display: inline-block; transition: transform .25s var(--ease); will-change: transform; }
+  .cta-band .row { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin-top: 26px; }
+  .cta-band .mail { font-family: var(--mono); font-size: 14px; color: var(--steel); }
+
+  footer { border-top: 1px solid var(--rule); padding: 28px 0 60px; font-size: 14px; color: var(--steel); display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  footer a { color: var(--steel); }
+
+  @media (max-width: 960px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; padding-top: 44px; }
+    .sheet { transform: none; }
+    .assembly .stage { height: auto; }
+    .assembly .sticky { position: relative; height: auto; grid-template-columns: 1fr; padding: 72px 0; gap: 32px; }
+    .desk { height: auto; }
+    .desk .paper { position: relative; inset: auto; max-width: none; margin: 0; }
+    .sources { display: none; }
+    .card, .prose { opacity: 1; transform: none; }
+    .steps li { color: var(--dark-text); } .steps li b { color: var(--dark-text); } .steps li::before { background: var(--orange); border-color: var(--orange); }
+    .rules { grid-template-columns: 1fr; }
+    .pilot .grid, .roi .grid { grid-template-columns: 1fr; gap: 36px; }
+    .fitlist { grid-template-columns: 1fr; }
+    .frame iframe { height: 560px; }
+    nav .links { display: none; }
+    section.pad { padding: 72px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Fieldstack home"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Fieldstack</a>
+    <div class="links">
+      <a href="#how">How it works</a>
+      <a href="#sample">Sample report</a>
+      <a href="#pilot">Pilot</a>
+      <a href="#fit">Fit</a>
+      <a href="#roi">Numbers</a>
+      <a href="https://github.com/robertcarrington22/fieldstack">Source</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <!-- ================= HERO ================= -->
+  <section class="wrap hero">
+    <div>
+      <span class="eyebrow rv">For general contractors on Procore</span>
+      <h1 class="rv d1">The owner<br>report, <span class="o">written</span><br>for you.</h1>
+      <p class="lede rv d2">Your project executive spends the night before the owner meeting pulling RFIs, submittals, change orders, and cost out of four systems into one document. Fieldstack assembles it every month, drafts the narrative in your voice, and cites the record behind every number.</p>
+      <div class="cta rv d3">
+        <a class="btn primary" href="#sample">See a sample report <span class="arr">→</span></a>
+        <a class="btn" href="#pilot">30-day pilot on one job</a>
+      </div>
+      <div class="proof rv d3">
+        <div><b data-count="4">0</b>systems, one report</div>
+        <div><b data-count="100" data-suffix="%">0</b>of numbers cited</div>
+        <div><b data-count="60" data-prefix="&lt;">0</b>minutes of PX edits</div>
+      </div>
+    </div>
+    <div class="sheet-wrap rv d2">
+      <div class="sheet" id="sheet" aria-label="Preview of an owner report">
+        <div class="tb">
+          <div><div class="k">Monthly owner report · August 2026</div><div class="t">Bergen Street Apartments</div></div>
+          <div class="k" style="text-align:right">Sample<br>data</div>
+        </div>
+        <div class="kp">
+          <div><div class="k">Complete</div><div class="v">33%</div></div>
+          <div><div class="k">Projected</div><div class="v">$915k under</div></div>
+          <div><div class="k">Sub. completion</div><div class="v o">+14 days</div></div>
+        </div>
+        <div class="row"><span>Slab edge conflict, with structural engineer <span class="cite">(RFI-041)</span></span><span class="v bad">12 bdays over</span></div>
+        <div class="row"><span>Curtain wall shop drawings, schedule-critical <span class="cite">(SUB-118.R2)</span></span><span class="v bad">19 bdays over</span></div>
+        <div class="row"><span>Lobby finish upgrade awaiting signature <span class="cite">(PCO-007)</span></span><span class="v">$186,200</span></div>
+        <div class="row"><span>Level 6 slab poured 08/28, 405 CY <span class="cite">(LOG-2026-08-28)</span></span><span class="v">on plan</span></div>
+        <span class="stamp">Draft for PX review</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="track" id="ticker">
+      <span><b>RFI-041</b> slab edge conflict <i>12 bdays over</i></span><span><b>SUB-118.R2</b> curtain wall shop drawings <i>19 bdays over</i></span><span><b>PCO-007</b> lobby finish upgrade <i>$186,200 pending</i></span><span><b>LOG-2026-08-28</b> Level 6 slab, 405 CY</span><span><b>MS-8</b> substantial completion <i>+14 days</i></span><span><b>SOV-03-000</b> concrete 60% complete</span><span><b>RFI-047</b> transformer vault louver <i>2 bdays over</i></span><span><b>PCO-008</b> water service reroute <i>$94,800 pending</i></span>
+    </div>
+  </div>
+
+  <!-- ================= ASSEMBLY ================= -->
+  <section class="assembly" id="how">
+    <div class="stage" id="stage">
+      <div class="wrap sticky">
+        <div>
+          <span class="eyebrow">How it works</span>
+          <h2>Four systems.<br>One sheet.</h2>
+          <ol class="steps" id="steps">
+            <li class="on"><b>Read Procore</b><span>RFIs, submittals, daily logs, change orders. Read-only token on one project.</span></li>
+            <li><b>Pull the ledger</b><span>Job cost by cost code from Sage 300 CRE or Vista. Accounting owns the dollars.</span></li>
+            <li><b>Pull the schedule</b><span>Milestones from P6 or MS Project. The scheduler owns the dates.</span></li>
+            <li><b>Compute, then write</b><span>Aging, dollars, and percents are computed in code. Claude drafts the prose and cites every record. Your PX approves.</span></li>
+          </ol>
+          <p class="mobile-note"></p>
+        </div>
+        <div class="desk" id="desk">
+          <div class="sources a">Procore<i></i></div>
+          <div class="sources c">P6 / MS Project<i></i></div>
+          <div class="sources b">Sage 300 CRE<i></i></div>
+          <div class="paper">
+            <div class="head"><span class="t">Owner report</span><span class="k">August 2026</span></div>
+            <div class="slot" data-step="1"><span class="lab">Open items · Procore</span>
+              <div class="card"><span>RFI-041 slab edge conflict, with structural engineer</span><span class="ref">12 bdays over</span></div>
+              <div class="card"><span>SUB-118.R2 curtain wall shop drawings</span><span class="ref">19 bdays over</span></div>
+              <div class="card"><span>PCO-007 lobby finish upgrade</span><span class="ref">$186,200</span></div>
+            </div>
+            <div class="slot" data-step="2"><span class="lab">Cost · Sage 300 CRE</span>
+              <div class="card ledger"><span>03-000 Cast-in-place concrete</span><span class="ref">$5,812,000 · 60%</span></div>
+              <div class="card ledger"><span>Projected at completion</span><span class="ref">$915,000 under</span></div>
+            </div>
+            <div class="slot" data-step="3"><span class="lab">Schedule · P6</span>
+              <div class="card sched"><span>MS-4 Topping out</span><span class="ref">10/30 · +14</span></div>
+              <div class="card sched"><span>MS-8 Substantial completion</span><span class="ref">12/14 · +14</span></div>
+            </div>
+            <div class="slot" data-step="4"><span class="lab">Narrative · Claude, cited</span>
+              <div class="prose" id="prose">The item the owner must act on is RFI-041, with the Structural Engineer of Record since 08/05 and 12 business days past its response date <span class="cite">(RFI-041)</span>. Level 5 formwork restarts 09/08 <span class="cite">(MS-3)</span>.<span class="cur"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SAMPLE ================= -->
+  <section class="pad" id="sample">
+    <div class="wrap">
+      <span class="eyebrow rv">Sample report</span>
+      <h2 class="rv d1">This is what<br>your owner gets.</h2>
+      <p class="measure rv d2">A fictional 96-unit affordable housing job with invented data. The numbers below were computed from the records, the prose was drafted by Claude from those numbers only, and every citation links back to the source. Scroll inside the frame or <a href="sample-report.html">open it full screen</a>.</p>
+      <div class="frame rv d2">
+        <div class="bar"><span><span class="dots"><i></i><i></i><i></i></span><span class="mono">bergen-street-apartments-2026-08.html</span></span><a href="sample-report.html" target="_blank" rel="noopener">Open in new tab →</a></div>
+        <iframe src="sample-report.html" title="Sample owner report" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RULES ================= -->
+  <section class="pad" style="padding-top:0">
+    <div class="wrap">
+      <span class="eyebrow rv">Why you can send it</span>
+      <h2 class="rv d1">The model never<br>does the math.</h2>
+      <p class="measure rv d2">Owners and lenders forward this report with draw requests. It has to be right. So the parts that can be wrong are computed in code, and the model only writes around them.</p>
+      <div class="rules">
+        <div class="rule-card rv"><span class="stamp">Verified</span><div class="num">RULE 01</div><h3>Computed, not guessed</h3><p>RFI aging in business days against your contract window. Overdue submittals. Pending change-order dollars. Dollar-weighted percent complete. Projected cost. All plain Python, all testable.</p><span class="bar"></span></div>
+        <div class="rule-card rv d1"><span class="stamp">Cited</span><div class="num">RULE 02</div><h3>Every claim has a record</h3><p>The narrative is drafted from the computed facts only and must cite a ref for every sentence with a number in it. Citations render as links back to Procore.</p><span class="bar"></span></div>
+        <div class="rule-card rv d2"><span class="stamp">Approved</span><div class="num">RULE 03</div><h3>A person hits send</h3><p>Nothing is posted back to any system and nothing goes to the owner on its own. Your PX reads it, edits what they want, and sends it. Usually in under half an hour.</p><span class="bar"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PILOT ================= -->
+  <section class="pilot pad" id="pilot">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <span class="eyebrow rv">Pilot</span>
+          <h2 class="rv d1">30 days.<br>One job.<br>One number.</h2>
+          <p class="measure rv d2">Pilots that convert are scoped to hit a metric, not to explore. We agree the number before week one and measure it in week four.</p>
+          <div class="weeks rv d2" role="tablist" aria-label="Pilot weeks" id="weeks">
+            <button role="tab" aria-selected="true" data-w="0"><small>WK</small>0</button>
+            <button role="tab" aria-selected="false" data-w="1"><small>WK</small>1</button>
+            <button role="tab" aria-selected="false" data-w="2"><small>WK</small>2</button>
+            <button role="tab" aria-selected="false" data-w="3"><small>WK</small>3</button>
+            <button role="tab" aria-selected="false" data-w="4"><small>WK</small>4</button>
+          </div>
+          <div class="week-panel rv d3" id="weekPanel" role="tabpanel">
+            <h4>Baseline</h4><p>Your PM logs the hours they spend on reporting for one week. Your PX names the metric. We issue a read-only token and hold a 30-minute kickoff.</p>
+          </div>
+        </div>
+        <div>
+          <ul class="terms rv d1">
+            <li><b>Cost</b><span>Free for 30 days on one active project. No contract. Cancel by email.</span></li>
+            <li><b>Setup</b><span>Under an hour. A Procore token with read scope, a kickoff, and your last two owner reports so the output matches your format.</span></li>
+            <li><b>You get</b><span>A weekly internal report every Monday and one monthly owner report, both cited, both editable, delivered to email and Teams or Slack.</span></li>
+            <li><b>After</b><span>$500 per project per month, three-project minimum, billed annually.</span></li>
+          </ul>
+          <div class="metrics rv d2">
+            <div class="metric"><span>PM hours per week on reporting, week 0 vs. week 4</span><span class="v">−60<small>% MIN</small></span></div>
+            <div class="metric"><span>PX edit time on the monthly owner report</span><span class="v">&lt;30<small>MIN</small></span></div>
+            <div class="metric"><span>Open items surfaced the team had not flagged</span><span class="v">3<small>MIN</small></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FIT ================= -->
+  <section class="pad" id="fit">
+    <div class="wrap">
+      <span class="eyebrow rv">Fit</span>
+      <h2 class="rv d1">Built for the GC<br>Procore's AI tier skips.</h2>
+      <p class="measure rv d2">Procore's own agents are locked to its Premier subscription. If you are on Essentials or Enhanced and your owners expect a formal monthly report, this is for you.</p>
+      <div class="seg rv d2" id="seg" data-on="0" role="tablist" aria-label="Fit">
+        <span class="thumb" aria-hidden="true"></span>
+        <button class="active" role="tab" aria-selected="true" data-f="0">Good fit</button>
+        <button role="tab" aria-selected="false" data-f="1">Not yet</button>
+      </div>
+      <ul class="fitlist rv d3" id="fitlist"></ul>
+    </div>
+  </section>
+
+  <!-- ================= ROI ================= -->
+  <section class="roi pad" id="roi">
+    <div class="wrap grid">
+      <div>
+        <span class="eyebrow rv">Numbers</span>
+        <h2 class="rv d1">What reporting<br>costs you now.</h2>
+        <p class="measure rv d2">Drag the sliders to your own numbers. Labor is the only line here. It leaves out the aged RFI that gets caught and the owner who awards the next job.</p>
+        <div class="slider rv d2">
+          <label><span>Active projects</span><output id="oProjects">12</output></label>
+          <input type="range" id="rProjects" min="3" max="40" value="12" step="1">
+          <label><span>PMs and PEs who write reports</span><output id="oPms">8</output></label>
+          <input type="range" id="rPms" min="1" max="30" value="8" step="1">
+          <label><span>Hours per PM per week on reporting</span><output id="oHours">6</output></label>
+          <input type="range" id="rHours" min="1" max="15" value="6" step="0.5">
+          <label><span>Loaded cost per PM per year</span><output id="oCost">$150,000</output></label>
+          <input type="range" id="rCost" min="90000" max="250000" value="150000" step="5000">
+        </div>
+      </div>
+      <div class="roi-out rv d2">
+        <div class="line"><span>Reporting hours per month, all PMs</span><span class="v" id="vHours">208</span></div>
+        <div class="line"><span>Labor recaptured per month (at 50%)</span><span class="v" id="vSaved">$7,500</span></div>
+        <div class="line"><span>Fieldstack per month ($500 / project)</span><span class="v" id="vCost">$6,000</span></div>
+        <div class="line"><span>Procore Premier upgrade, for comparison</span><span class="v">$80k to $150k / yr</span></div>
+        <div class="big"><span>Net per month</span><span class="v" id="vNet">$1,500</span></div>
+        <p class="note" id="vNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="cta-band">
+    <div class="wrap">
+      <span class="eyebrow rv">Next step</span>
+      <h2 class="rv d1">Pick a job.<br>We'll write<br>September's report.</h2>
+      <div class="row rv d2">
+        <a class="btn primary magnet" id="magnet" href="mailto:robertcarrington22@gmail.com?subject=Fieldstack%20pilot">Ask about a pilot <span class="arr">→</span></a>
+        <span class="mail">robertcarrington22@gmail.com · New York</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>Fieldstack · Prototype, September 2026 · Sample data throughout; no real project is described.</span>
+  <span><a href="https://github.com/robertcarrington22/fieldstack">Source on GitHub</a> · <a href="https://github.com/robertcarrington22/fieldstack/blob/main/ARCHITECTURE.md">Architecture</a></span>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  // progress bar + nav
+  var nav = $('#nav'), prog = $('#progress');
+  function onScroll() {
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    nav.classList.toggle('solid', h.scrollTop > 8);
+    assembly();
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // reveal
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  $$('.rv').forEach(function (el) { io.observe(el); });
+
+  // counters
+  var cio = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return; cio.unobserve(e.target);
+      var el = e.target, target = +el.getAttribute('data-count'), pre = el.getAttribute('data-prefix') || '', suf = el.getAttribute('data-suffix') || '';
+      var t0 = null, dur = reduce ? 0 : 900;
+      function step(ts) { if (!t0) t0 = ts; var p = dur ? Math.min(1, (ts - t0) / dur) : 1; p = 1 - Math.pow(1 - p, 3);
+        el.innerHTML = pre + Math.round(target * p) + suf; if (p < 1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.5 });
+  $$('[data-count]').forEach(function (el) { cio.observe(el); });
+
+  // hero sheet tilt
+  var sheet = $('#sheet'), wrap = sheet && sheet.parentElement;
+  if (wrap && !reduce && window.matchMedia('(pointer:fine)').matches) {
+    wrap.addEventListener('mousemove', function (e) {
+      var r = wrap.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      sheet.style.transform = 'rotateX(' + (-y * 8) + 'deg) rotateY(' + (x * 12) + 'deg) rotateZ(0deg)';
+    });
+    wrap.addEventListener('mouseleave', function () { sheet.style.transform = ''; });
+  }
+
+  // assembly scroll sequence
+  var stage = $('#stage'), steps = $$('#steps li'), slots = $$('.slot'), prose = $('#prose');
+  var mobile = window.matchMedia('(max-width: 960px)');
+  var lastStep = -1;
+  function setStep(n) {
+    if (n === lastStep) return; lastStep = n;
+    steps.forEach(function (li, i) { li.classList.toggle('on', i <= n); });
+    slots.forEach(function (s) {
+      var k = +s.getAttribute('data-step');
+      var on = k <= n + 1;
+      s.classList.toggle('filled', on);
+      $$('.card', s).forEach(function (c, i) { setTimeout(function () { c.classList.toggle('on', on); }, on ? i * 120 : 0); });
+    });
+    prose.classList.toggle('on', n >= 3);
+  }
+  function assembly() {
+    if (!stage) return;
+    if (mobile.matches) { setStep(3); return; }
+    var r = stage.getBoundingClientRect(), vh = window.innerHeight;
+    var total = r.height - vh, passed = Math.min(Math.max(-r.top, 0), total);
+    var p = total > 0 ? passed / total : 1;
+    setStep(p < .18 ? 0 : p < .42 ? 1 : p < .66 ? 2 : 3);
+  }
+
+  // pilot weeks
+  var weekData = [
+    ['Baseline', 'Your PM logs the hours they spend on reporting for one week. Your PX names the metric. We issue a read-only token and hold a 30-minute kickoff.'],
+    ['First weekly report', 'Delivered Monday at 6 a.m. Expect corrections. We capture every one; they become your project\'s standing instructions.'],
+    ['Tuned', 'Second report in your voice. The open-items section is added: RFI and submittal aging against your contract windows, pending change orders with dollars.'],
+    ['Owner draft', 'The monthly owner report is drafted. Your PX reviews before anything goes external. We time the edit.'],
+    ['Readout', 'Baseline hours vs. week 4. Owner feedback. Convert at $500 per project per month, or close with a thank-you and the reports you already have.']
+  ];
+  var panel = $('#weekPanel');
+  $$('#weeks button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('#weeks button').forEach(function (x) { x.setAttribute('aria-selected', 'false'); });
+      b.setAttribute('aria-selected', 'true');
+      var d = weekData[+b.getAttribute('data-w')];
+      panel.style.opacity = 0;
+      setTimeout(function () { panel.innerHTML = '<h4>' + d[0] + '</h4><p>' + d[1] + '</p>'; panel.style.transition = 'opacity .3s'; panel.style.opacity = 1; }, reduce ? 0 : 140);
+    });
+  });
+
+  // fit toggle
+  var fits = [
+    ['$50M to $300M in annual volume', 'Procore Essentials or Enhanced, or Autodesk Build', 'Sage 300 CRE or Viewpoint Vista for job cost', 'Institutional, multifamily, healthcare, or public work with owner\'s reps and lenders', '8 to 40 active projects', 'A named project executive or VP of operations'],
+    ['Procore Premier customers, who can build this in Agent Builder', 'ENR Top 100 firms with enterprise AI budgets', 'Firms under $30M with no project executive', 'Self-perform trade contractors, a different report and buyer', 'Owners who do not require a monthly written report', 'Jobs without an active Procore project']
+  ];
+  var seg = $('#seg'), fitlist = $('#fitlist');
+  function renderFit(i) {
+    fitlist.classList.add('swap');
+    setTimeout(function () {
+      fitlist.innerHTML = fits[i].map(function (t) { return '<li>' + t + '</li>'; }).join('');
+      fitlist.classList.toggle('no', i === 1);
+      fitlist.classList.remove('swap');
+    }, reduce ? 0 : 200);
+  }
+  $$('#seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = +b.getAttribute('data-f');
+      seg.setAttribute('data-on', i);
+      $$('#seg button').forEach(function (x) { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
+      b.classList.add('active'); b.setAttribute('aria-selected', 'true');
+      renderFit(i);
+    });
+  });
+  renderFit(0);
+
+  // roi
+  var r = { p: $('#rProjects'), m: $('#rPms'), h: $('#rHours'), c: $('#rCost') };
+  function money(n) { var neg = n < 0; n = Math.abs(Math.round(n)); return (neg ? '−' : '') + '$' + n.toLocaleString('en-US'); }
+  function roi() {
+    var p = +r.p.value, m = +r.m.value, h = +r.h.value, c = +r.c.value;
+    $('#oProjects').textContent = p; $('#oPms').textContent = m; $('#oHours').textContent = h; $('#oCost').textContent = money(c);
+    var hours = m * h * 4.33, saved = hours * (c / 2080) * 0.5, cost = p * 500, net = saved - cost;
+    $('#vHours').textContent = Math.round(hours).toLocaleString('en-US');
+    $('#vSaved').textContent = money(saved); $('#vCost').textContent = money(cost);
+    var vn = $('#vNet'); vn.textContent = money(net); vn.classList.toggle('neg', net < 0);
+    var ratio = cost ? saved / cost : 0;
+    $('#vNote').textContent = ratio >= 2 ? 'Labor alone clears 2x. The owner-relationship value is upside.'
+      : ratio >= 1 ? 'Positive on labor alone. The open-items count from the pilot usually decides it.'
+      : 'Labor alone does not cover it at these inputs. Most PXs find the measured hours are higher than their guess.';
+  }
+  Object.keys(r).forEach(function (k) { r[k].addEventListener('input', roi); });
+  roi();
+
+  // magnetic button
+  var mag = $('#magnet');
+  if (mag && !reduce && window.matchMedia('(pointer:fine)').matches) {
+    mag.addEventListener('mousemove', function (e) {
+      var b = mag.getBoundingClientRect(), x = e.clientX - (b.left + b.width / 2), y = e.clientY - (b.top + b.height / 2);
+      mag.style.transform = 'translate(' + x * .18 + 'px,' + y * .28 + 'px)';
+    });
+    mag.addEventListener('mouseleave', function () { mag.style.transform = ''; });
+  }
+
+  // ticker: duplicate content for seamless loop
+  var tk = $('#ticker'); if (tk) tk.innerHTML += tk.innerHTML;
+
+  onScroll();
+})();
+</script>
+</body>
+</html>

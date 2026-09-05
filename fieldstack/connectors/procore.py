@@ -1,14 +1,15 @@
 """
-Procore connector.
+Procore connector (project management system of record).
 
-Two clients share one interface:
+Settings (fieldstack.toml):
+  mode      = "mock" | "live"
+  fixtures  = "mock/procore"          (mock)
+  token     = "${PROCORE_TOKEN}"      (live; OAuth access token, read scope)
+  company_id = 1234                   (live)
 
-  MockProcoreClient  reads the JSON fixtures in mock/procore/ (built by mock/build_fixtures.py)
-  LiveProcoreClient  calls the Procore REST API (rest/v1.0). Untested against a real tenant;
-                     the endpoint paths and field names follow Procore's public docs and the
-                     normalizer below expects the same shapes the fixtures use.
-
-Both return a ProjectSnapshot. Nothing downstream knows which one produced it.
+The live client follows Procore REST v1.0 paths. It has not been run against a real
+tenant; expect to adjust field mapping in normalize() on first contact, especially
+budget views and daily log sub-resources.
 """
 from __future__ import annotations
 
@@ -19,13 +20,11 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Any, Optional
 
-from .model import (BudgetLine, ChangeOrder, DailyLog, Manpower, Milestone, Project,
-                    ProjectSnapshot, RFI, Submittal)
+from ..model import (BudgetLine, ChangeOrder, DailyLog, Manpower, Milestone, Project, RFI, Submittal)
+from . import Capability, Partial, register
 
 
-# --------------------------------------------------------------- helpers ---
 def _d(value: Any) -> Optional[date]:
-    """Parse a Procore date or datetime string into a date."""
     if not value:
         return None
     if isinstance(value, date):
@@ -41,13 +40,11 @@ def _bic(raw: Any) -> str:
     return str(raw or "")
 
 
-# ------------------------------------------------------------ normalizer ---
-def normalize(raw: dict[str, Any], period_start: date, period_end: date) -> ProjectSnapshot:
-    """Turn a dict of raw Procore payloads into a ProjectSnapshot."""
+def normalize(raw: dict[str, Any], period_start: date, period_end: date, source: str) -> Partial:
     p = raw["project"]
     cf = p.get("custom_fields", {})
     project = Project(
-        id=p["id"], name=p["name"], number=p.get("project_number", ""),
+        id=str(p["id"]), name=p["name"], number=p.get("project_number", ""),
         address=", ".join(x for x in [p.get("address"), p.get("city"), p.get("state_code")] if x),
         description=p.get("description", ""),
         start_date=_d(p["start_date"]), completion_date=_d(p["completion_date"]),
@@ -58,6 +55,7 @@ def normalize(raw: dict[str, Any], period_start: date, period_end: date) -> Proj
         project_manager=cf.get("project_manager", ""), superintendent=cf.get("superintendent", ""),
         rfi_window_bdays=int(cf.get("rfi_response_window_business_days", 10)),
         submittal_window_bdays=int(cf.get("submittal_review_window_business_days", 14)),
+        source=source,
     )
 
     rfis = [RFI(
@@ -69,8 +67,8 @@ def normalize(raw: dict[str, Any], period_start: date, period_end: date) -> Proj
         answer=(r.get("answers") or [{}])[0].get("body") if r.get("answers") else None,
         cost_impact=(r.get("cost_impact") or {}).get("status") == "yes",
         schedule_impact=(r.get("schedule_impact") or {}).get("status") == "yes",
-        link=r.get("link", ""),
-    ) for r in raw["rfis"]]
+        link=r.get("link", ""), source=source,
+    ) for r in raw.get("rfis", [])]
 
     submittals = [Submittal(
         ref=f"SUB-{s['number']}" + (f".R{s['revision']}" if s.get("revision") else ""),
@@ -79,16 +77,16 @@ def normalize(raw: dict[str, Any], period_start: date, period_end: date) -> Proj
         received=_d(s["received_date"]), due=_d(s.get("due_date")), returned=_d(s.get("returned_date")),
         ball_in_court=_bic(s.get("ball_in_court")),
         schedule_critical=bool((s.get("custom_fields") or {}).get("schedule_critical")),
-        note=(s.get("custom_fields") or {}).get("note") or "", link=s.get("link", ""),
-    ) for s in raw["submittals"]]
+        note=(s.get("custom_fields") or {}).get("note") or "", link=s.get("link", ""), source=source,
+    ) for s in raw.get("submittals", [])]
 
     change_orders = [ChangeOrder(
         ref=c["number"], number=c["number"], title=c["title"], status=c["status"],
         amount=c.get("amount"), created=_d(c["created_at"]),
         submitted_to_owner=_d(c.get("submitted_to_owner_at")), approved=_d(c.get("approved_at")),
         executed_number=c.get("executed_change_order"), schedule_days=c.get("schedule_days"),
-        description=c.get("description", ""),
-    ) for c in raw["change_orders"]]
+        description=c.get("description", ""), link=c.get("link", ""), source=source,
+    ) for c in raw.get("change_orders", [])]
 
     budget = [BudgetLine(
         ref=f"SOV-{b['cost_code']['full_code']}", code=b["cost_code"]["full_code"],
@@ -96,15 +94,16 @@ def normalize(raw: dict[str, Any], period_start: date, period_end: date) -> Proj
         approved_changes=float(b.get("approved_change_orders") or 0), revised=float(b["revised_budget"]),
         committed=float(b.get("committed_costs") or 0), cost_to_date=float(b.get("job_to_date_costs") or 0),
         billed_to_date=float(b.get("billed_to_date") or 0), percent_complete=float(b.get("percent_complete") or 0),
-    ) for b in raw["budget"]]
+        source=source,
+    ) for b in raw.get("budget", [])]
 
     milestones = [Milestone(
         ref=f"MS-{m['id']}", name=m["name"], baseline=_d(m["baseline"]), current=_d(m["current"]),
-        actual=_d(m.get("actual")),
-    ) for m in raw["milestones"]]
+        actual=_d(m.get("actual")), source=source,
+    ) for m in raw.get("milestones", [])]
 
     logs = []
-    for lg in raw["daily_logs"]:
+    for lg in raw.get("daily_logs", []):
         day = _d(lg["date"])
         if not (period_start <= day <= period_end):
             continue
@@ -117,74 +116,68 @@ def normalize(raw: dict[str, Any], period_start: date, period_end: date) -> Proj
                       for m in lg.get("manpower_logs", [])],
             work=" ".join(x.get("description", "") for x in lg.get("work_logs", [])),
             safety=[x.get("description", "") for x in lg.get("safety_violation_logs", [])],
-            link=lg.get("link", ""),
+            link=lg.get("link", ""), source=source,
         ))
 
-    return ProjectSnapshot(project=project, period_start=period_start, period_end=period_end,
-                           rfis=rfis, submittals=submittals, change_orders=change_orders,
-                           budget=budget, milestones=milestones, daily_logs=logs)
+    return Partial(project=project, rfis=rfis, submittals=submittals, change_orders=change_orders,
+                   budget=budget, milestones=milestones, daily_logs=logs)
 
 
-# ------------------------------------------------------------ mock client ---
-class MockProcoreClient:
-    def __init__(self, fixtures_dir: Path):
-        self.dir = Path(fixtures_dir)
-
-    def _load(self, name: str):
-        return json.loads((self.dir / name).read_text(encoding="utf-8"))
-
-    def snapshot(self, project_id: int, period_start: date, period_end: date) -> ProjectSnapshot:
-        raw = {
-            "project": self._load("project.json"),
-            "rfis": self._load("rfis.json"),
-            "submittals": self._load("submittals.json"),
-            "change_orders": self._load("change_orders.json"),
-            "budget": self._load("budget.json"),
-            "milestones": self._load("schedule_milestones.json"),
-            "daily_logs": self._load("daily_logs.json"),
-        }
-        assert raw["project"]["id"] == project_id, "fixture project id mismatch"
-        return normalize(raw, period_start, period_end)
-
-
-# ------------------------------------------------------------ live client ---
-class LiveProcoreClient:
-    """
-    Minimal read-only client for Procore's REST API. Requires an OAuth access token
-    (customer-issued for a pilot) and the company id. Read scope only.
-
-    Not yet run against a real tenant. Field names in the responses will differ in
-    places from the fixtures (notably budget views and daily log sub-resources), so
-    expect to adjust normalize() the first time this runs for real.
-    """
+@register("procore")
+class ProcoreConnector:
+    capabilities = frozenset({Capability.PROJECT, Capability.RFIS, Capability.SUBMITTALS, Capability.CHANGE_ORDERS,
+                              Capability.BUDGET, Capability.MILESTONES, Capability.DAILY_LOGS})
     BASE = "https://api.procore.com/rest/v1.0"
 
-    def __init__(self, access_token: str, company_id: int):
-        self.token = access_token
-        self.company_id = company_id
+    def __init__(self, name: str, settings: dict):
+        self.name = name
+        self.mode = settings.get("mode", "mock")
+        self.fixtures = Path(settings.get("fixtures", "mock/procore"))
+        self.token = settings.get("token")
+        self.company_id = settings.get("company_id")
 
+    # ---- mock
+    def _load(self, fname: str):
+        return json.loads((self.fixtures / fname).read_text(encoding="utf-8"))
+
+    def _fetch_mock(self, project_ref) -> dict:
+        raw = {k: self._load(f) for k, f in [
+            ("project", "project.json"), ("rfis", "rfis.json"), ("submittals", "submittals.json"),
+            ("change_orders", "change_orders.json"), ("budget", "budget.json"),
+            ("milestones", "schedule_milestones.json"), ("daily_logs", "daily_logs.json")]}
+        if str(raw["project"]["id"]) != str(project_ref):
+            raise ValueError(f"fixture project {raw['project']['id']} != requested {project_ref}")
+        return raw
+
+    # ---- live
     def _get(self, path: str, **params) -> Any:
-        url = f"{self.BASE}{path}"
-        if params:
-            url += "?" + urllib.parse.urlencode(params, doseq=True)
+        url = f"{self.BASE}{path}" + (("?" + urllib.parse.urlencode(params, doseq=True)) if params else "")
         req = urllib.request.Request(url, headers={
-            "Authorization": f"Bearer {self.token}",
-            "Procore-Company-Id": str(self.company_id),
-            "Accept": "application/json",
-        })
+            "Authorization": f"Bearer {self.token}", "Procore-Company-Id": str(self.company_id),
+            "Accept": "application/json"})
         with urllib.request.urlopen(req, timeout=60) as resp:
             return json.loads(resp.read().decode("utf-8"))
 
-    def snapshot(self, project_id: int, period_start: date, period_end: date) -> ProjectSnapshot:
-        pid = project_id
-        raw = {
+    def _fetch_live(self, pid, ps: date, pe: date) -> dict:
+        return {
             "project": self._get(f"/projects/{pid}"),
             "rfis": self._get(f"/projects/{pid}/rfis", per_page=250),
             "submittals": self._get(f"/projects/{pid}/submittals", per_page=250),
             "change_orders": self._get(f"/projects/{pid}/change_order_packages", per_page=250),
             "budget": self._get(f"/projects/{pid}/budget_line_items", per_page=500),
             "milestones": self._get(f"/projects/{pid}/schedule/milestones", per_page=250),
-            "daily_logs": self._get(f"/projects/{pid}/daily_logs",
-                                    start_date=period_start.isoformat(), end_date=period_end.isoformat()),
+            "daily_logs": self._get(f"/projects/{pid}/daily_logs", start_date=ps.isoformat(), end_date=pe.isoformat()),
         }
-        return normalize(raw, period_start, period_end)
+
+    # ---- protocol
+    def fetch(self, project_ref, period_start: date, period_end: date) -> Partial:
+        raw = self._fetch_live(project_ref, period_start, period_end) if self.mode == "live" else self._fetch_mock(project_ref)
+        return normalize(raw, period_start, period_end, self.name)
+
+    def health(self) -> tuple[bool, str]:
+        if self.mode == "live":
+            if not (self.token and self.company_id):
+                return False, "live mode needs token and company_id"
+            return True, "live (untested against a real tenant)"
+        ok = (self.fixtures / "project.json").exists()
+        return ok, f"mock fixtures at {self.fixtures}" if ok else f"no fixtures at {self.fixtures}"

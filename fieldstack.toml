@@ -1,0 +1,59 @@
+# Fieldstack tenant config: the sample tenant.
+# Copy this file per customer. Strings like "${PROCORE_TOKEN}" are read from the environment.
+
+[tenant]
+name = "Sample Builders LLC"
+
+# Connectors, in default precedence order.
+[[connectors]]
+name = "procore"
+kind = "procore"
+mode = "mock"                 # "live" with token and company_id for a real tenant
+fixtures = "mock/procore"
+# token = "${PROCORE_TOKEN}"
+# company_id = 1234
+
+[[connectors]]
+name = "ledger"
+kind = "csv_ledger"           # Sage 300 CRE / Vista job-cost export; swap for kind = "hh2" when the customer grants access
+path = "mock/ledger.csv"
+
+[[connectors]]
+name = "schedule"
+kind = "csv_schedule"         # P6 / MS Project milestone export
+path = "mock/schedule.csv"
+
+# Per-capability precedence. Accounting owns dollars; the scheduler owns dates.
+[precedence]
+budget = ["ledger", "procore"]
+milestones = ["schedule", "procore"]
+
+[[projects]]
+key = "bergen"
+name = "Bergen Street Apartments"
+prior_report = "mock/prior_owner_report_excerpt.md"
+ids = { procore = 2264101, ledger = "26-014", schedule = "26-014" }
+
+[llm]
+provider = "auto"             # auto | claude | mock
+model = "claude-opus-5"
+
+[store]
+path = "out/fieldstack.sqlite"
+
+[[delivery]]
+kind = "file"
+dir = "out"
+
+# [[delivery]]
+# kind = "webhook"
+# url = "${SLACK_WEBHOOK_URL}"
+# report_link = "https://reports.example.com/bergen"
+
+# [[delivery]]
+# kind = "email"
+# host = "smtp.example.com"
+# user = "${SMTP_USER}"
+# password = "${SMTP_PASSWORD}"
+# from = "reports@samplebuilders.example"
+# to = ["px@samplebuilders.example"]

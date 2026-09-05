@@ -1,78 +1,68 @@
 """
-Fieldstack Owner Report, command line.
+Fieldstack, command line.
 
-  python run.py                                  # mock Procore, auto-pick narrator, August 2026
-  python run.py --period 2026-08 --narrator mock
-  python run.py --narrator claude                # requires ANTHROPIC_API_KEY or `ant auth login`
-  python run.py --live --token $TOKEN --company 1234 --project 5678
-
-Writes out/<project>-<period>.html, .md, and facts.json.
+  python run.py                                     # fieldstack.toml, project bergen, owner_report, August 2026
+  python run.py --period 2026-08 --as-of 2026-09-04 --llm claude
+  python run.py --config customers/acme.toml --project tower --module owner_report
+  python run.py --list                              # connectors and modules available
 """
 from __future__ import annotations
 
 import argparse
 import calendar
-import json
+import logging
 import sys
 from datetime import date
 from pathlib import Path
 
-from fieldstack.metrics import compute
-from fieldstack.narrative import make_narrator
-from fieldstack.procore import LiveProcoreClient, MockProcoreClient
-from fieldstack.render import render_html, render_markdown
+from fieldstack import config as cfg_mod
+from fieldstack.connectors import kinds as connector_kinds
+from fieldstack.jobs import run_module
+from fieldstack.llm import make_gateway
+from fieldstack.modules import module_names
 
 ROOT = Path(__file__).parent
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Generate an Owner Report from Procore data.")
+    ap = argparse.ArgumentParser(description="Run a Fieldstack module for one project and period.")
+    ap.add_argument("--config", default=str(ROOT / "fieldstack.toml"))
+    ap.add_argument("--project", default=None, help="project key from the config (default: first)")
+    ap.add_argument("--module", default="owner_report")
     ap.add_argument("--period", default="2026-08", help="YYYY-MM")
     ap.add_argument("--as-of", default=None, help="Report date, YYYY-MM-DD (default: today)")
-    ap.add_argument("--project", type=int, default=2264101)
-    ap.add_argument("--narrator", choices=["auto", "claude", "mock"], default="auto")
-    ap.add_argument("--live", action="store_true", help="Use the live Procore API instead of fixtures")
-    ap.add_argument("--token", default=None)
-    ap.add_argument("--company", type=int, default=None)
-    ap.add_argument("--out", default=str(ROOT / "out"))
+    ap.add_argument("--llm", choices=["auto", "claude", "mock"], default=None, help="override [llm].provider")
+    ap.add_argument("--no-deliver", action="store_true")
+    ap.add_argument("--no-store", action="store_true")
+    ap.add_argument("--list", action="store_true")
+    ap.add_argument("-v", "--verbose", action="store_true")
     args = ap.parse_args()
 
+    logging.basicConfig(level=logging.INFO if args.verbose else logging.WARNING, format="%(levelname)s %(message)s")
+
+    if args.list:
+        print("connectors:", ", ".join(connector_kinds()))
+        print("modules:   ", ", ".join(module_names()))
+        return 0
+
+    cfg = cfg_mod.load(args.config)
+    project_key = args.project or cfg.projects[0].key
     year, month = (int(x) for x in args.period.split("-"))
-    ps = date(year, month, 1)
-    pe = date(year, month, calendar.monthrange(year, month)[1])
+    period = (date(year, month, 1), date(year, month, calendar.monthrange(year, month)[1]))
     as_of = date.fromisoformat(args.as_of) if args.as_of else date.today()
+    llm = make_gateway(args.llm, cfg.llm_model) if args.llm else None
 
-    if args.live:
-        if not (args.token and args.company):
-            print("--live needs --token and --company", file=sys.stderr)
-            return 2
-        client = LiveProcoreClient(args.token, args.company)
-    else:
-        client = MockProcoreClient(ROOT / "mock" / "procore")
-
-    print(f"Pulling {'live' if args.live else 'mock'} Procore data for project {args.project}, {ps} to {pe} ...")
-    snap = client.snapshot(args.project, ps, pe)
-    print(f"  {len(snap.rfis)} RFIs, {len(snap.submittals)} submittals, {len(snap.change_orders)} change orders, "
-          f"{len(snap.budget)} budget lines, {len(snap.milestones)} milestones, {len(snap.daily_logs)} daily logs")
-
-    facts = compute(snap, as_of)
-    print(f"  {facts.percent_complete_sov * 100:.0f}% complete, {len(facts.rfis_overdue)} RFIs overdue, "
-          f"{len(facts.submittals_overdue)} submittals overdue, {len(facts.change_orders_pending)} COs pending")
-
-    narrator = make_narrator(None if args.narrator == "auto" else args.narrator)
-    print(f"Writing narrative with {type(narrator).__name__} ...")
-    prior = ROOT / "mock" / "prior_owner_report_excerpt.md"
-    nar = narrator.write(facts, prior.read_text(encoding="utf-8") if prior.exists() else "")
-    if nar.usage:
-        print(f"  tokens: {nar.usage}")
-
-    out = Path(args.out)
-    out.mkdir(parents=True, exist_ok=True)
-    stem = f"{snap.project.name.lower().replace(' ', '-')}-{args.period}"
-    (out / f"{stem}.html").write_text(render_html(snap, facts, nar, sample=not args.live), encoding="utf-8")
-    (out / f"{stem}.md").write_text(render_markdown(snap, facts, nar), encoding="utf-8")
-    (out / f"{stem}.facts.json").write_text(json.dumps(facts.to_dict(), indent=2, default=str), encoding="utf-8")
-    print(f"Wrote {out / (stem + '.html')}")
+    print(f"{cfg.name} / {project_key} / {args.module} / {args.period} as of {as_of}")
+    res = run_module(cfg, project_key, args.module, period, as_of, llm=llm,
+                     deliver=not args.no_deliver, store=not args.no_store)
+    print("sources:  " + ", ".join(f"{k}<-{v}" for k, v in res.sources.items()))
+    for n in res.notes:
+        print("note:     " + n)
+    if res.llm_usage:
+        print(f"llm:      {res.llm_usage}")
+    for d in res.deliveries:
+        print("sent:     " + d)
+    print(f"attention: {len(res.output.attention)} item(s)")
     return 0
 
 
